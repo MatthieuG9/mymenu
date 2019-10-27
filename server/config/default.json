@@ -30,13 +30,14 @@
     "oauth": {
       "redirect": "/",
       "google": {
-        "key": "<google oauth key>",
-        "secret": "<google oauth secret>",
+        "key": "567741638508-5uukk0lp3tgcmr7l6vi3m23hi4tjdj7r.apps.googleusercontent.com",
+        "secret": "CF9sI_pi7vzQkI2On5SNJNFO",
         "scope": [
           "email",
           "profile",
           "openid"
-        ]
+        ],
+        "nonce": true
       },
       "facebook": {
         "key": "<facebook oauth key>",
