@@ -20,6 +20,7 @@ export default function (app: Application) {
   }, { _id: false, autoIndex: false });
 
   const recipes = new Schema({
+    name: { type: String, required: true },
     ownerId: { type: Schema.Types.ObjectId, ref: 'users' },
     type: { 
       type: String, 

@@ -1,14 +1,14 @@
-// Initializes the `users` service on path `/users`
+// Initializes the `Ingredients` service on path `/ingredients`
 import { ServiceAddons } from '@feathersjs/feathers';
 import { Application } from '../../declarations';
-import { Users } from './users.class';
-import createModel from '../../models/users.model';
-import hooks from './users.hooks';
+import { Ingredients } from './ingredients.class';
+import createModel from '../../models/ingredients.model';
+import hooks from './ingredients.hooks';
 
 // Add this service to the service type index
 declare module '../../declarations' {
   interface ServiceTypes {
-    'users': Users & ServiceAddons<any>;
+    'ingredients': Ingredients & ServiceAddons<any>;
   }
 }
 
@@ -19,10 +19,10 @@ export default function (app: Application) {
   };
 
   // Initialize our service with any options it requires
-  app.use('/users', new Users(options, app));
+  app.use('/ingredients', new Ingredients(options, app));
 
   // Get our initialized service so that we can register hooks
-  const service = app.service('users');
+  const service = app.service('ingredients');
 
   service.hooks(hooks);
 }
