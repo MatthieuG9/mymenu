@@ -1,6 +1,7 @@
 import * as authentication from '@feathersjs/authentication';
 import { setField } from 'feathers-authentication-hooks';
 import { softDelete2 } from 'feathers-hooks-common';
+import FixSoftDelete404 from '../../common/fix-404';
 // Don't remove this comment. It's needed to format import lines nicely.
 
 const { authenticate } = authentication.hooks;
@@ -40,6 +41,6 @@ export default {
     create: [],
     update: [],
     patch: [],
-    remove: []
+    remove: [ FixSoftDelete404() ]
   }
 };

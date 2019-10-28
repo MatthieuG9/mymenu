@@ -38,7 +38,8 @@ export default function (app: Application) {
       required: function(this:any) {
         return this.type == 'details'
       }
-    }
+    },
+    deletedAt: { type: Number, default: -1 }
   }, {
     timestamps: true
   });

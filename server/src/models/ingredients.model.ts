@@ -8,7 +8,8 @@ export default function (app: Application) {
   const mongooseClient = app.get('mongooseClient');
   const { Schema } = mongooseClient;
   const ingredients = new Schema({
-    name: { type: String, required: true,  index: true, unique: true }
+    name: { type: String, required: true,  index: true, unique: true },
+    deletedAt: { type: Number, default: -1 }
   }, {
     timestamps: true
   });
