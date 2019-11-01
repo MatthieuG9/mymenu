@@ -6,22 +6,28 @@ import FixSoftDelete404 from '../../common/fix-404';
 
 const { authenticate } = authentication.hooks;
 
+const setOwnerInBody = setField({
+  from: 'params.user._id',
+  as: 'data.ownerId'
+});
+
+const filterByOwnerId = setField({
+  from: 'params.user._id',
+  as: 'params.query.ownerId'
+});
+
 export default {
   before: {
     all: [ 
       authenticate('jwt'), 
-      softDelete2(), 
-      setField({
-        from: 'params.user.id',
-        as: 'params.query.ownerId'
-      }) 
+      softDelete2()
     ],
-    find: [],
-    get: [],
-    create: [],
-    update: [],
-    patch: [],
-    remove: []
+    find: [filterByOwnerId],
+    get: [filterByOwnerId],
+    create: [setOwnerInBody],
+    update: [filterByOwnerId],
+    patch: [filterByOwnerId],
+    remove: [filterByOwnerId]
   },
 
   after: {

@@ -21,7 +21,7 @@ export default function (app: Application) {
 
   const recipes = new Schema({
     name: { type: String, required: true },
-    ownerId: { type: Schema.Types.ObjectId, ref: 'users' },
+    ownerId: { type: Schema.Types.ObjectId, ref: 'users', required: true },
     type: { 
       type: String, 
       required: true, 
