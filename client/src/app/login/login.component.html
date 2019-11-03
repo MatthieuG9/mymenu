@@ -1,0 +1,15 @@
+<div class="login-container">
+    <mat-card class="login-card">
+        <mat-card-header class="grey w-100">
+            <mat-card-title class="w-100 text-center">{{'LOGIN' | translate}}</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+            <div class="btn-container">
+                <div class="login-btn">
+                    <button [ngClass]="{'btn-login': true, loading: loading}" [disabled]="loading" mat-raised-button color="accent">{{ 'LOGIN_USING_GOOGLE' | translate }}</button>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
