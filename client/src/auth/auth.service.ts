@@ -1,85 +1,110 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, of } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
+import * as _ from 'lodash';
 import { IUser } from 'src/models/user';
 import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class AuthService {
 
-  protected storagePrefix:string = 'mymenu-';
-  public authentificated: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    protected storagePrefix: string = 'mymenu-';
+    public authentificated: Subject<boolean> = new Subject<boolean>();
 
-  constructor (private http: HttpClient) {
-      if ( this.isAuthentificated() ) {
-          this.authentificated.next(true);
-      }
-  }
+    constructor(private http: HttpClient) {
+        this.isAuthentificated().subscribe(result => this.authentificated.next(result));
+    }
 
-  /**
-   * Get current authentified user
-   * @return User
-   */
-  public getUser(): IUser {
-      let user = this.get('currentUserAuth');
+    /**
+     * Get current authentified user
+     * @return User
+     */
+    public getUser(): IUser {
+        let user = this.get('currentUserAuth');
         return user;
-  }
+    }
 
 
-  /**
-   * Get current access token
-   * @return string
-   */
-  public getToken(): string {
-      return this.get('accessToken');
-  }
+    /**
+     * Get current access token
+     * @return string
+     */
+    public getToken(): string {
+        return this.get('accessToken');
+    }
 
-  /**
-   * Check if user is authentified and if token is valid
-   * @return boolean
-   */
-  public isAuthentificated(): boolean {
-      const token = this.getToken();
-      return !!token;
-  }
+    protected getTokenFromCurrentUrl():string | undefined {
+        let url = decodeURIComponent(window.location.href);
+        let result = url.match(/\#access_token\=([^&]*)/);
+        return result && result.length > 1 && result[1];
+    }
 
-  public login(providerName:string) {
-    window.location.href = environment.apiUrl + 'oauth/' + providerName;
-  }
+    protected refreshToken()
+    {
+        let token = this.getTokenFromCurrentUrl();
+        if(token)
+        {
+            this.store('accessToken', token);
+        }
+    }
 
-  /**
-   * Remove all data stored in localstorage
-   */
-  public logout() {
-      this.remove('currentUserAuth');
-      this.remove('accessToken');
-      this.authentificated.next(false);
-  }
+    /**
+     * Check if user is authentified and if token is valid
+     * @return boolean
+     */
+    public isAuthentificated(): Observable<boolean> {
+        this.refreshToken();
+        let token = this.getToken();
+        return this.http.get(environment.apiUrl + 'users',
+        {
+            headers: {
+                Authorization: 'Bearer '+token 
+            }
+        })
+            .pipe(
+                map(x => !!_.get(x,'data[0]._id',false)),
+                catchError(x => of(false))
+            )
+    }
 
-  /**
-   * Get data stored in LocalStorage
-   * @param name 
-   */
-  private get(name: string) {
-      return JSON.parse(localStorage.getItem(this.storagePrefix + name));
-  }
+    public login(providerName: string) {
+        window.location.href = environment.apiUrl + 'oauth/' + providerName;
+    }
 
-  /**
-   * Remove data from Localstorage
-   * @param name 
-   */
-  private remove(name: string) {
-      localStorage.removeItem(this.storagePrefix + name);
-  }
+    /**
+     * Remove all data stored in localstorage
+     */
+    public logout() {
+        this.remove('currentUserAuth');
+        this.remove('accessToken');
+        this.authentificated.next(false);
+    }
 
-  /**
-   * Store data in Localstorage
-   * @param name 
-   * @param data 
-   */
-  private store(name: string, data: any) {
-      localStorage.setItem(this.storagePrefix + name, JSON.stringify(data));
-  }
+    /**
+     * Get data stored in LocalStorage
+     * @param name 
+     */
+    private get(name: string) {
+        return JSON.parse(localStorage.getItem(this.storagePrefix + name));
+    }
+
+    /**
+     * Remove data from Localstorage
+     * @param name 
+     */
+    private remove(name: string) {
+        localStorage.removeItem(this.storagePrefix + name);
+    }
+
+    /**
+     * Store data in Localstorage
+     * @param name 
+     * @param data 
+     */
+    private store(name: string, data: any) {
+        localStorage.setItem(this.storagePrefix + name, JSON.stringify(data));
+    }
 }
