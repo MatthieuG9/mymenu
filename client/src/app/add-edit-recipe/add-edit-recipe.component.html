@@ -1,0 +1,11 @@
+<div>
+    <form [formGroup]="mainForm" >
+        <mat-form-field>
+            <input matInput formControlName="name" placeholder="{{ 'RECIPE.NAME' | translate }}">
+        </mat-form-field>
+        <mat-radio-group class="type-group" formControlName="type">
+            <mat-radio-button value="link">{{ 'REGISTER_LINK' | translate }}</mat-radio-button>
+            <mat-radio-button value="details">{{ 'REGISTER_COMPLETE_RECIPE' | translate }}</mat-radio-button>
+        </mat-radio-group>
+    </form>
+</div>

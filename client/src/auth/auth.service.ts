@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment.prod';
 export class AuthService {
 
     protected storagePrefix: string = 'mymenu-';
-    public authentificated: Subject<boolean> = new Subject<boolean>();
+    public authentificated: BehaviorSubject<boolean | null> = new BehaviorSubject(null);
 
     constructor(private http: HttpClient) {
         this.isAuthentificated().subscribe(result => this.authentificated.next(result));

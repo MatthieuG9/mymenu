@@ -1,4 +1,8 @@
 {
     "LOGIN": "Connexion",
-    "LOGIN_USING_GOOGLE": "Connexion avec Google Id"
+    "LOGIN_USING_GOOGLE": "Connexion avec Google Id",
+    "ADD_RECIPE": "Ajouter une recette",
+    "RECIPE": {
+        "NAME": "Nom de la recette"
+    }
 }
