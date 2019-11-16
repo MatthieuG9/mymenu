@@ -7,5 +7,14 @@
             <mat-radio-button value="link">{{ 'REGISTER_LINK' | translate }}</mat-radio-button>
             <mat-radio-button value="details">{{ 'REGISTER_COMPLETE_RECIPE' | translate }}</mat-radio-button>
         </mat-radio-group>
+        <div [hidden]="!typeIsLink()">
+            <mat-form-field>
+                <input matInput formControlName="url" placeholder="{{'RECIPE.LINK' | translate}}" >
+            </mat-form-field>
+        </div>
+        <div class="action-buttons">
+            <button routerLink="/" mat-raised-button>{{'CANCEL' | translate }}</button>
+            <button type="submit" [disabled]="!mainForm.valid" mat-raised-button color="primary">{{'VALIDATE' | translate }}</button>
+        </div>
     </form>
 </div>

@@ -12,6 +12,7 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { AddEditRecipeComponent } from './add-edit-recipe/add-edit-recipe.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import {  RxReactiveFormsModule } from "@rxweb/reactive-form-validators"
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -30,6 +31,7 @@ export function createTranslateLoader(http: HttpClient) {
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
+    RxReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
