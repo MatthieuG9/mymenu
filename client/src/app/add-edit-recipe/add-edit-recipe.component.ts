@@ -1,6 +1,10 @@
+import * as _ from 'lodash';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl, FormArray} from '@angular/forms';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
+import { ApiService } from 'src/api/api.service';
+import { Recipe, IRecipe, RecipeType, IRecipeDetails } from 'src/models/recipe';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-edit-recipe',
@@ -11,7 +15,10 @@ export class AddEditRecipeComponent implements OnInit {
 
   public mainForm:FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder, 
+    private router: Router,
+    private api: ApiService) {
     this.buildFormGroup();
    }
 
@@ -71,5 +78,35 @@ export class AddEditRecipeComponent implements OnInit {
   getFormArray(arrayName:string)
   {
     return this.mainForm.get('details').get(arrayName) as FormArray;
+  }
+
+  save()
+  {
+    let data = this.clean(this.mainForm.value);
+    this.api.save<Recipe>(Recipe, 'recipes',data)
+      .subscribe(( result ) => {
+        console.log('Recipe saved',result);
+        this.router.navigate(['/']);
+      });
+  }
+
+  clean(srcData:any):IRecipe
+  {
+    let result:IRecipe = _.cloneDeep(srcData) as IRecipe;
+    if(result.type == RecipeType.link)
+    {
+      delete result.details;
+    }else{
+      delete result.url;
+      result.details = this.cleanRecipeDetails(result.details);
+    }
+    return result;
+  }
+
+  private cleanRecipeDetails(details: IRecipeDetails) {
+    details = details || { ingredients: [], instructions: [] };
+    details.instructions = _.filter(details.instructions, (x) => !!x.content);
+    details.ingredients = _.filter(details.ingredients, (x) => !!x.ingredientId);
+    return details;
   }
 }

@@ -13,6 +13,8 @@ import { HomeComponent } from './home/home.component';
 import { AddEditRecipeComponent } from './add-edit-recipe/add-edit-recipe.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {  RxReactiveFormsModule } from "@rxweb/reactive-form-validators"
+import { AuthModule } from 'src/auth/auth.module';
+import { ApiModule } from 'src/api/api.module';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -45,7 +47,9 @@ export function createTranslateLoader(http: HttpClient) {
         useFactory: (createTranslateLoader),
         deps: [HttpClient]
       }
-    })
+    }),
+    AuthModule,
+    ApiModule
   ],
   providers: [],
   bootstrap: [AppComponent]
