@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl, FormArray} from '@angular/forms';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
 
 @Component({
@@ -32,10 +32,18 @@ export class AddEditRecipeComponent implements OnInit {
         ingredients: this.fb.array([ this.buildIngredientForm()])
       })
     });
+
+    this.mainForm.patchValue({
+      details: {
+        instructions: [ {content:''}]
+      }
+    });
   }
 
-  buildInstructionForm(): FormControl {
-    return this.fb.control({ value: ''});
+  buildInstructionForm(): FormGroup {
+    return this.fb.group({
+      content: ['']
+    });
   }
 
   buildIngredientForm(): FormGroup {
@@ -48,5 +56,20 @@ export class AddEditRecipeComponent implements OnInit {
 
   typeIsLink(): boolean {
     return this.mainForm.get('type').value === 'link';
+  }
+
+  addRow(arrayName:string, i:number)
+  {
+    this.getFormArray(arrayName).insert(i + 1,this.buildInstructionForm());
+  }
+
+  removeRow(arrayName:string, i:number)
+  {
+    this.getFormArray(arrayName).removeAt(i);
+  }
+
+  getFormArray(arrayName:string)
+  {
+    return this.mainForm.get('details').get(arrayName) as FormArray;
   }
 }

@@ -8,6 +8,10 @@ export default function (app: Application) {
   const mongooseClient = app.get('mongooseClient');
   const { Schema } = mongooseClient;
 
+  const instructions = new Schema({
+    content: { type: String, required: true}
+  },{ _id: false, autoIndex: false });
+
   const ingredients = new Schema({
     ingredientId : { type: Schema.Types.ObjectId, ref: 'ingredients' },
     quantity: { type: Number, required: true},
@@ -15,7 +19,7 @@ export default function (app: Application) {
   },{ _id: false, autoIndex: false });
 
   const details = new Schema({
-    instructions: [String],
+    instructions: [ instructions ],
     ingredients: [ ingredients ]
   }, { _id: false, autoIndex: false });
 

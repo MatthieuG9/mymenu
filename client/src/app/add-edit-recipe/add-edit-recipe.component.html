@@ -12,6 +12,21 @@
                 <input matInput formControlName="url" placeholder="{{'RECIPE.LINK' | translate}}" >
             </mat-form-field>
         </div>
+        <div [hidden]="typeIsLink()" formGroupName="details">
+            <div formArrayName="instructions" >
+                <div *ngFor="let instruction of mainForm.controls.details.controls.instructions.controls; let i=index" [formGroupName]="i">
+                    <mat-form-field>
+                        <input matInput formControlName="content" placeholder="{{'RECIPE.INSTRUCTION' | translate}}" >
+                    </mat-form-field>
+                    <button mat-icon-button aria-label="Add instruction" (click)="addRow('instructions',i)">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                    <button mat-icon-button aria-label="Add instruction" (click)="removeRow('instructions',i)">
+                            <mat-icon>remove</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
         <div class="action-buttons">
             <button routerLink="/" mat-raised-button>{{'CANCEL' | translate }}</button>
             <button type="submit" [disabled]="!mainForm.valid" mat-raised-button color="primary">{{'VALIDATE' | translate }}</button>
