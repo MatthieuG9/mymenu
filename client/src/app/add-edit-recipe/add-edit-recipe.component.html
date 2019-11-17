@@ -26,6 +26,18 @@
                     </button>
                 </div>
             </div>
+            
+            <div formArrayName="ingredients" >
+                <div *ngFor="let ingredient of mainForm.controls.details.controls.ingredients.controls; let i=index" [formGroupName]="i">
+                    <app-recipe-ingredient-form [ingredientFormGroup]="mainForm.controls.details.controls.ingredients.controls[i]"></app-recipe-ingredient-form>
+                    <button mat-icon-button aria-label="Add instruction" (click)="addRow('ingredients',i)">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                    <button mat-icon-button aria-label="Add instruction" (click)="removeRow('ingredients',i)">
+                        <mat-icon>remove</mat-icon>
+                    </button>
+                </div>
+            </div>
         </div>
         <div class="action-buttons">
             <button routerLink="/" mat-raised-button>{{'CANCEL' | translate }}</button>

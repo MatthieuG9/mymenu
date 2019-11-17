@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatCardModule, MatRadioModule, MatFormFieldModule, MatInputModule, MatIconModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatRadioModule, MatFormFieldModule, MatInputModule, MatIconModule, MatAutocompleteModule, MatSelectModule } from '@angular/material';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateService, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -15,6 +15,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {  RxReactiveFormsModule } from "@rxweb/reactive-form-validators"
 import { AuthModule } from 'src/auth/auth.module';
 import { ApiModule } from 'src/api/api.module';
+import { RecipeIngredientFormComponent } from './recipe-ingredient-form/recipe-ingredient-form.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -25,7 +26,8 @@ export function createTranslateLoader(http: HttpClient) {
     AppComponent,
     HomeComponent,
     LoginComponent,
-    AddEditRecipeComponent
+    AddEditRecipeComponent,
+    RecipeIngredientFormComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +42,8 @@ export function createTranslateLoader(http: HttpClient) {
     MatRadioModule,
     MatCardModule,
     MatIconModule,
+    MatAutocompleteModule,
+    MatSelectModule,
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {

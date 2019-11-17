@@ -55,7 +55,7 @@ export class AddEditRecipeComponent implements OnInit {
 
   buildIngredientForm(): FormGroup {
     return this.fb.group({
-      ingredientId: '',
+      ingredientId: [''],
       quantity: [ 1, [ Validators.required, Validators.min(0.001)] ],
       unit: [ 'unit', [ Validators.required ]]
     });
