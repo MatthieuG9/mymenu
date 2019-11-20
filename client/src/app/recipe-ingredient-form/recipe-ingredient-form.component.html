@@ -1,4 +1,4 @@
-<div [formGroup]="ingredientFormGroup" class="recipe-ingredient-container">
+<div *ngIf="ready" [formGroup]="formGroup" class="recipe-ingredient-container">
     <mat-form-field >
         <input type="text" placeholder="{{ 'SEARCH.INGREDIENT' | translate}}" matInput formControlName="ingredientId" [matAutocomplete]="auto">
         <mat-autocomplete #auto="matAutocomplete">

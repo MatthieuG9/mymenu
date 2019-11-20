@@ -67,7 +67,7 @@ export class AddEditRecipeComponent implements OnInit {
 
   addRow(arrayName:string, i:number)
   {
-    this.getFormArray(arrayName).insert(i + 1,this.buildInstructionForm());
+    this.getFormArray(arrayName).insert(i + 1, arrayName == 'instructions' ? this.buildInstructionForm() : this.buildIngredientForm());
   }
 
   removeRow(arrayName:string, i:number)

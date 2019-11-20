@@ -28,8 +28,8 @@
             </div>
             
             <div formArrayName="ingredients" >
-                <div *ngFor="let ingredient of mainForm.controls.details.controls.ingredients.controls; let i=index" [formGroupName]="i">
-                    <app-recipe-ingredient-form [ingredientFormGroup]="mainForm.controls.details.controls.ingredients.controls[i]"></app-recipe-ingredient-form>
+                <div *ngFor="let ingredient of mainForm.controls.details.controls.ingredients.controls; let i=index" >
+                    <app-recipe-ingredient-form [formArray]="mainForm.controls.details.controls.ingredients" [formArrayIndex]="i"></app-recipe-ingredient-form>
                     <button mat-icon-button aria-label="Add instruction" (click)="addRow('ingredients',i)">
                         <mat-icon>add</mat-icon>
                     </button>

@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { Component, Input, ChangeDetectionStrategy, OnChanges, SimpleChanges } from '@angular/core';
+import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Ingredient } from 'src/models/ingredient';
 import { IngredientUnit } from 'src/models/recipe';
@@ -9,10 +9,15 @@ import { IngredientUnit } from 'src/models/recipe';
   templateUrl: './recipe-ingredient-form.component.html',
   styleUrls: ['./recipe-ingredient-form.component.scss']
 })
-export class RecipeIngredientFormComponent
+export class RecipeIngredientFormComponent implements OnChanges
 {
   @Input()
-  ingredientFormGroup: FormGroup;
+  formArray: FormArray;
+  @Input()
+  formArrayIndex: number;
+
+  formGroup: FormGroup;
+  ready: boolean;
 
   filteredIngredients: Observable<Ingredient[]>;
 
@@ -20,6 +25,11 @@ export class RecipeIngredientFormComponent
 
   constructor() {
   
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.formGroup = this.formArray && this.formArray.get(this.formArrayIndex.toString()) as FormGroup || null;
+    this.ready = !!this.formGroup;
   }
 
 
