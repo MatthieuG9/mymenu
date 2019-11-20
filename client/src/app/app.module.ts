@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatCardModule, MatRadioModule, MatFormFieldModule, MatInputModule, MatIconModule, MatAutocompleteModule, MatSelectModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatRadioModule, MatFormFieldModule, MatInputModule, MatIconModule, MatAutocompleteModule, MatSelectModule, MatProgressSpinnerModule } from '@angular/material';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateService, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -12,7 +12,7 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { AddEditRecipeComponent } from './add-edit-recipe/add-edit-recipe.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import {  RxReactiveFormsModule } from "@rxweb/reactive-form-validators"
+import { RxReactiveFormsModule } from "@rxweb/reactive-form-validators"
 import { AuthModule } from 'src/auth/auth.module';
 import { ApiModule } from 'src/api/api.module';
 import { RecipeIngredientFormComponent } from './recipe-ingredient-form/recipe-ingredient-form.component';
@@ -44,6 +44,7 @@ export function createTranslateLoader(http: HttpClient) {
     MatIconModule,
     MatAutocompleteModule,
     MatSelectModule,
+    MatProgressSpinnerModule,
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {
@@ -58,8 +59,8 @@ export function createTranslateLoader(http: HttpClient) {
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { 
-  
+export class AppModule {
+
   constructor(private translate: TranslateService) {
     translate.addLangs(['en', 'fr']);
     translate.setDefaultLang('fr');

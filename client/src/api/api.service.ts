@@ -5,6 +5,7 @@ import { AuthService } from 'src/auth/auth.service';
 import { environment } from 'src/environments/environment';
 import { throwError, Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { Ingredient } from 'src/models/ingredient';
 
 export interface ApiFeathersResponse<T> {
   data: T[],
@@ -22,11 +23,10 @@ export class ApiService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  constructor(protected auth: AuthService, protected http: HttpClient) { 
+  constructor(protected auth: AuthService, protected http: HttpClient) {
     auth.authentificated.subscribe((authentificated) => {
-      if(authentificated)
-      {
-        this.options.headers = this.options.headers.append('Authorization', 'Bearer '+this.auth.getToken())
+      if (authentificated) {
+        this.options.headers = this.options.headers.append('Authorization', 'Bearer ' + this.auth.getToken())
       }
     });
   }
@@ -35,7 +35,7 @@ export class ApiService {
     return environment.apiUrl
   }
 
-  getResultData(res:any) {
+  getResultData(res: any) {
     return res && res.data || res;
   }
 
@@ -44,15 +44,22 @@ export class ApiService {
     return throwError(error);
   }
 
-  save<T>(T: new (any?) => T,url: string, data: T, options?: any) {
-    if((data as any)._id)
-    {
-      return this.updateOne<T>(T,url,data,options);
-    }else{
+  findIngredients(search: string, limit: number) {
+    let url = 'ingredients?name[$search]=' + search;
+    if (limit) {
+      url += '&$limit=' + limit;
+    }
+    return this.get(Ingredient, url);
+  }
+
+  save<T>(T: new (any?) => T, url: string, data: T, options?: any) {
+    if ((data as any)._id) {
+      return this.updateOne<T>(T, url, data, options);
+    } else {
       return this.postOne<T>(T, url, data, options);
     }
   }
-  
+
   getRaw<T>(url: string, options?: any): Observable<any> {
     let sendOptions = this.options;
     if (options) {
@@ -91,9 +98,9 @@ export class ApiService {
     }
     data = this.mapData(data);
     return this.http.post<T>(this.getApiUrl() + url, data, sendOptions)
-    .pipe(
-      catchError(err => this.handleError(err))
-    );
+      .pipe(
+        catchError(err => this.handleError(err))
+      );
   }
 
   postOne<T>(T: new (any?) => T, url: string, data?: any, options?: any): Observable<T> {
@@ -130,7 +137,7 @@ export class ApiService {
       );
   }
 
-  deleteById(url:string, id:string | number){
+  deleteById(url: string, id: string | number) {
     return this.deleteRaw(url + "/" + id);
   }
 
@@ -142,15 +149,15 @@ export class ApiService {
   }
 
   private mapData(data: any): any {
-    if ( _.isArray(data) ) {
-      for ( let i=0 ; i<data.length ; i++ ) {
+    if (_.isArray(data)) {
+      for (let i = 0; i < data.length; i++) {
         let one: any = data[i];
-        if ( one._className ) {
+        if (one._className) {
           delete one._className;
           data[i] = one;
         }
       }
-    } else if ( _.isObject(data) && (data as any)._className ) {
+    } else if (_.isObject(data) && (data as any)._className) {
       delete (data as any)._className;
     }
     return data;

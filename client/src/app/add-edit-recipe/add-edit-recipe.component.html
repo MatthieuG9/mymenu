@@ -1,5 +1,5 @@
 <div>
-    <form [formGroup]="mainForm" >
+    <form [formGroup]="mainForm">
         <mat-form-field>
             <input matInput formControlName="name" placeholder="{{ 'RECIPE.NAME' | translate }}">
         </mat-form-field>
@@ -9,27 +9,29 @@
         </mat-radio-group>
         <div [hidden]="!typeIsLink()">
             <mat-form-field>
-                <input matInput formControlName="url" placeholder="{{'RECIPE.LINK' | translate}}" >
+                <input matInput formControlName="url" placeholder="{{'RECIPE.LINK' | translate}}">
             </mat-form-field>
         </div>
         <div [hidden]="typeIsLink()" formGroupName="details">
-            <div formArrayName="instructions" >
-                <div *ngFor="let instruction of mainForm.controls.details.controls.instructions.controls; let i=index" [formGroupName]="i">
+            <div formArrayName="instructions">
+                <div *ngFor="let instruction of mainForm.controls.details.controls.instructions.controls; let i=index"
+                    [formGroupName]="i">
                     <mat-form-field>
-                        <input matInput formControlName="content" placeholder="{{'RECIPE.INSTRUCTION' | translate}}" >
+                        <input matInput formControlName="content" placeholder="{{'RECIPE.INSTRUCTION' | translate}}">
                     </mat-form-field>
                     <button mat-icon-button aria-label="Add instruction" (click)="addRow('instructions',i)">
                         <mat-icon>add</mat-icon>
                     </button>
                     <button mat-icon-button aria-label="Add instruction" (click)="removeRow('instructions',i)">
-                            <mat-icon>remove</mat-icon>
+                        <mat-icon>remove</mat-icon>
                     </button>
                 </div>
             </div>
-            
-            <div formArrayName="ingredients" >
-                <div *ngFor="let ingredient of mainForm.controls.details.controls.ingredients.controls; let i=index" >
-                    <app-recipe-ingredient-form [formArray]="mainForm.controls.details.controls.ingredients" [formArrayIndex]="i"></app-recipe-ingredient-form>
+
+            <div formArrayName="ingredients">
+                <div *ngFor="let ingredient of mainForm.controls.details.controls.ingredients.controls; let i=index">
+                    <app-recipe-ingredient-form [formArray]="mainForm.controls.details.controls.ingredients"
+                        [formArrayIndex]="i"></app-recipe-ingredient-form>
                     <button mat-icon-button aria-label="Add instruction" (click)="addRow('ingredients',i)">
                         <mat-icon>add</mat-icon>
                     </button>
@@ -41,7 +43,8 @@
         </div>
         <div class="action-buttons">
             <button routerLink="/" mat-raised-button>{{'CANCEL' | translate }}</button>
-            <button type="submit" [disabled]="!mainForm.valid" mat-raised-button color="primary" (click)=save($event)>{{'VALIDATE' | translate }}</button>
+            <button type="submit" [disabled]="!mainForm.valid" mat-raised-button color="primary"
+                (click)=save($event)>{{'VALIDATE' | translate }}</button>
         </div>
     </form>
 </div>

@@ -1,22 +1,26 @@
 <div *ngIf="ready" [formGroup]="formGroup" class="recipe-ingredient-container">
-    <mat-form-field >
-        <input type="text" placeholder="{{ 'SEARCH.INGREDIENT' | translate}}" matInput formControlName="ingredientId" [matAutocomplete]="auto">
-        <mat-autocomplete #auto="matAutocomplete">
-            <mat-option *ngFor="let ingredient of filteredIngredients | async" [value]="ingredient._id">
-            {{ingredient.name}}
+    <mat-form-field>
+        <input type="text" placeholder="{{ 'SEARCH.INGREDIENT' | translate}}" [formControl]="searchInput" matInput
+            [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayIngredient">
+            <mat-option *ngFor="let ingredient of filteredIngredients | async" [value]="ingredient"
+                (optionSelected)="selectIngredient($event)">
+                {{ingredient.name}}
+            </mat-option>
+            <mat-option *ngIf="isLoading" class="is-loading">
+                <mat-spinner diameter="50"></mat-spinner>
             </mat-option>
         </mat-autocomplete>
     </mat-form-field>
-    <mat-form-field >
-        <input matInput placeholder="{{ 'QUANTITY' | translate }}" formControlName="quantity" >
+    <mat-form-field>
+        <input matInput placeholder="{{ 'QUANTITY' | translate }}" formControlName="quantity">
     </mat-form-field>
     <mat-form-field>
         <mat-label>{{ 'UNITY' | translate }}</mat-label>
-        <mat-select formControlName="unit" >
+        <mat-select formControlName="unit">
             <mat-option *ngFor="let unit of units" [value]="unit">
-            {{unit}}
+                {{unit}}
             </mat-option>
         </mat-select>
     </mat-form-field>
 </div>
-      

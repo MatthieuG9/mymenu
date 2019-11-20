@@ -44,6 +44,7 @@
     "feathers-authentication-hooks": "^1.0.1",
     "feathers-hooks-common": "^4.20.7",
     "feathers-mongodb": "^6.0.0",
+    "feathers-mongodb-fuzzy-search": "^1.1.1",
     "feathers-mongoose": "^8.1.0",
     "helmet": "^3.21.2",
     "mongodb": "^3.3.3",
