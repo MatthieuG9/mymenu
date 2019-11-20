@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>{{ 'INGREDIENT.NEW' | translate }}</h1>
+<div mat-dialog-content>
+    <mat-form-field>
+        <input matInput placeholder="{{ 'INGREDIENT.NAME' }}" [(ngModel)]="ingredientName" required>
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="cancel()">{{ 'CANCEL' | translate }}</button>
+    <button mat-button [disabled]="!ingredientName" (click)="save()">{{ 'VALIDATE' | translate }}</button>
+</div>

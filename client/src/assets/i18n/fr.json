@@ -3,6 +3,22 @@
     "LOGIN_USING_GOOGLE": "Connexion avec Google Id",
     "ADD_RECIPE": "Ajouter une recette",
     "RECIPE": {
-        "NAME": "Nom de la recette"
-    }
+        "NAME": "Nom de la recette",
+        "LINK": "Lien (http://marmiton...)",
+        "INSTRUCTION": "Instruction"
+    },
+    "INGREDIENT": {
+        "ADD": "Ajouter un ingrédient",
+        "NEW": "Création d'un nouvel ingrédient",
+        "NAME": "Nom de l'ingrédient"
+    },
+    "SEARCH": {
+        "INGREDIENT": "Ingrédient"
+    },
+    "QUANTITY": "Quantité",
+    "UNIT": "Unité",
+    "CANCEL": "Annuler",
+    "VALIDATE": "Valider",
+    "REGISTER_LINK": "Enregistrer un lien",
+    "REGISTER_COMPLETE_RECIPE": "Enregistrer une recette détaillée"
 }

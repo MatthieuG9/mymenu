@@ -6,7 +6,8 @@ import { IngredientUnit } from 'src/models/recipe';
 import { filter, debounceTime, distinctUntilChanged, tap, switchMap } from 'rxjs/operators';
 import * as _ from 'lodash';
 import { ApiService } from 'src/api/api.service';
-import { MatAutocompleteSelectedEvent } from '@angular/material';
+import { MatAutocompleteSelectedEvent, MatDialog } from '@angular/material';
+import { NewIngredientDialogComponent } from '../new-ingredient-dialog/new-ingredient-dialog.component';
 
 @Component({
   selector: 'app-recipe-ingredient-form',
@@ -23,12 +24,13 @@ export class RecipeIngredientFormComponent implements OnInit, OnChanges {
   searchInput = new FormControl('');
   ready: boolean;
   isLoading: boolean = false;
+  noResult: boolean = false;
 
   filteredIngredients = new BehaviorSubject<Ingredient[]>([]);
 
   units = [IngredientUnit.unit, IngredientUnit.g, IngredientUnit.ml];
 
-  constructor(private api: ApiService) {
+  constructor(private dialog: MatDialog, private api: ApiService) {
 
   }
 
@@ -48,6 +50,7 @@ export class RecipeIngredientFormComponent implements OnInit, OnChanges {
       distinctUntilChanged(),
       tap(() => {
         this.isLoading = true;
+        this.noResult = false;
         this.filteredIngredients.next([]);
       }),
       switchMap(value => {
@@ -55,6 +58,7 @@ export class RecipeIngredientFormComponent implements OnInit, OnChanges {
       })
     ).subscribe((result) => {
       this.isLoading = false;
+      this.noResult = !result || result.length == 0;
       this.filteredIngredients.next(result);
     });
   }
@@ -66,6 +70,22 @@ export class RecipeIngredientFormComponent implements OnInit, OnChanges {
   selectIngredient(event: MatAutocompleteSelectedEvent) {
     this.formGroup.patchValue({
       ingredientId: event.option.value && event.option.value._id || null
+    });
+  }
+
+  openIngredientDialog() {
+    const dialogRef = this.dialog.open(NewIngredientDialogComponent, {
+      width: '80vw',
+      data: { name: this.searchInput.value }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.searchInput = result.name;
+        this.formGroup.patchValue({
+          ingredientId: result._id
+        });
+      }
     });
   }
 

@@ -1,5 +1,24 @@
 {
     "LOGIN": "Login",
     "LOGIN_USING_GOOGLE": "Login with Google Id",
-    "ADD_RECIPE": "Add recipe"
+    "ADD_RECIPE": "Add recipe",
+    "RECIPE": {
+        "NAME": "Recipe name",
+        "LINK": "Link (http://marmiton...)",
+        "INSTRUCTION": "Instruction"
+    },
+    "INGREDIENT": {
+        "ADD": "New ingredient",
+        "NEW": "Add new ingredient",
+        "NAME": "Ingredient name"
+    },
+    "SEARCH": {
+        "INGREDIENT": "Ingredient"
+    },
+    "QUANTITY": "Quantity",
+    "UNIT": "Unit",
+    "CANCEL": "Cancel",
+    "VALIDATE": "Validate",
+    "REGISTER_LINK": "Register a link",
+    "REGISTER_COMPLETE_RECIPE": "Register a complete recipe"
 }

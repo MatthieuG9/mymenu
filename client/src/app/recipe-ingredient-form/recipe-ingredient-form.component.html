@@ -10,13 +10,16 @@
             <mat-option *ngIf="isLoading" class="is-loading">
                 <mat-spinner diameter="50"></mat-spinner>
             </mat-option>
+            <mat-option *ngIf="noResult" class="no-result">
+                <button mat-button (click)="openIngredientDialog()">{{'INGREDIENT.ADD'}}</button>
+            </mat-option>
         </mat-autocomplete>
     </mat-form-field>
     <mat-form-field>
         <input matInput placeholder="{{ 'QUANTITY' | translate }}" formControlName="quantity">
     </mat-form-field>
     <mat-form-field>
-        <mat-label>{{ 'UNITY' | translate }}</mat-label>
+        <mat-label>{{ 'UNIT' | translate }}</mat-label>
         <mat-select formControlName="unit">
             <mat-option *ngFor="let unit of units" [value]="unit">
                 {{unit}}
