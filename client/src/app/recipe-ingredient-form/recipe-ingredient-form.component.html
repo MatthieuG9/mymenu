@@ -1,7 +1,7 @@
 <div *ngIf="ready" [formGroup]="formGroup" class="recipe-ingredient-container">
     <mat-form-field>
         <input type="text" placeholder="{{ 'SEARCH.INGREDIENT' | translate}}" [formControl]="searchInput" matInput
-            [matAutocomplete]="auto">
+            [matAutocomplete]="auto" [(value)]="searchValue">
         <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayIngredient">
             <mat-option *ngFor="let ingredient of filteredIngredients | async" [value]="ingredient"
                 (optionSelected)="selectIngredient($event)">
@@ -11,7 +11,7 @@
                 <mat-spinner diameter="50"></mat-spinner>
             </mat-option>
             <mat-option *ngIf="noResult" class="no-result">
-                <button mat-button (click)="openIngredientDialog()">{{'INGREDIENT.ADD'}}</button>
+                <button mat-button (click)="openIngredientDialog()">{{'INGREDIENT.ADD' | translate }}</button>
             </mat-option>
         </mat-autocomplete>
     </mat-form-field>
@@ -26,4 +26,5 @@
             </mat-option>
         </mat-select>
     </mat-form-field>
+    <!-- <button mat-button (click)="debug()">Debug</button> -->
 </div>

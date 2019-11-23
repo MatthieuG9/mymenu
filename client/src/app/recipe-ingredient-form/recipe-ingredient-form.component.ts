@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy, OnChanges, SimpleChanges, OnInit } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, OnChanges, SimpleChanges, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { Ingredient, IIngredient } from 'src/models/ingredient';
@@ -22,6 +22,7 @@ export class RecipeIngredientFormComponent implements OnInit, OnChanges {
 
   formGroup: FormGroup;
   searchInput = new FormControl('');
+  searchValue: string = '';
   ready: boolean;
   isLoading: boolean = false;
   noResult: boolean = false;
@@ -30,7 +31,7 @@ export class RecipeIngredientFormComponent implements OnInit, OnChanges {
 
   units = [IngredientUnit.unit, IngredientUnit.g, IngredientUnit.ml];
 
-  constructor(private dialog: MatDialog, private api: ApiService) {
+  constructor(private dialog: MatDialog, private api: ApiService, private changeDetectorRef: ChangeDetectorRef) {
 
   }
 
@@ -81,10 +82,11 @@ export class RecipeIngredientFormComponent implements OnInit, OnChanges {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.searchInput = result.name;
+        this.searchValue = result.name;
         this.formGroup.patchValue({
           ingredientId: result._id
         });
+        this.changeDetectorRef.markForCheck();
       }
     });
   }

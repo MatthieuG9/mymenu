@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import { ApiService } from 'src/api/api.service';
@@ -9,7 +9,8 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-add-edit-recipe',
   templateUrl: './add-edit-recipe.component.html',
-  styleUrls: ['./add-edit-recipe.component.scss']
+  styleUrls: ['./add-edit-recipe.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddEditRecipeComponent implements OnInit {
 
