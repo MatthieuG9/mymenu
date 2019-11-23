@@ -7,7 +7,10 @@
         "LINK": "Lien (http://marmiton...)",
         "INSTRUCTION": "Instruction",
         "DURATION": "Temps de préparation",
-        "SERVING": "Portions"
+        "SERVING": "Portions",
+        "CONFIRM_DELETE": "Suppression de la recette",
+        "MESSAGE_DELETE": "Êtes-vous sûre de vouloir supprimer cette recette ?",
+        "DELETED": "Recette supprimée"
     },
     "INGREDIENT": {
         "ADD": "Ajouter un ingrédient",
@@ -21,6 +24,8 @@
     "UNIT": "Unité",
     "CANCEL": "Annuler",
     "VALIDATE": "Valider",
+    "YES": "Oui",
+    "NO": "Non",
     "REGISTER_LINK": "Enregistrer un lien",
     "REGISTER_COMPLETE_RECIPE": "Enregistrer une recette détaillée"
 }

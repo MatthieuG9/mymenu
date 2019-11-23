@@ -1,8 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ApiService } from 'src/api/api.service';
 import { BehaviorSubject } from 'rxjs';
-import { Recipe } from 'src/models/recipe';
+import { Recipe, IRecipe } from 'src/models/recipe';
 import * as qs from 'qs';
+import { ConfirmDialogModel, ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { MatDialog, MatSnackBar } from '@angular/material';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-recipe-list',
@@ -23,9 +26,13 @@ export class RecipeListComponent implements OnInit {
 
   datas: BehaviorSubject<Recipe[]> = new BehaviorSubject([]);
 
-  constructor(private api: ApiService) { }
+  constructor(private dialog: MatDialog, private snackBar: MatSnackBar, private translate: TranslateService, private api: ApiService) { }
 
   ngOnInit() {
+    this.loadRecipes();
+  }
+
+  loadRecipes() {
     this.api.get(Recipe, 'recipes?' + this.buildQueryParams()).subscribe(result => {
       this.datas.next(result);
     });
@@ -39,5 +46,25 @@ export class RecipeListComponent implements OnInit {
       params.$limit = this.limit;
     }
     return qs.stringify(params);
+  }
+
+  delete(recipe: IRecipe) {
+    if (recipe && recipe._id) {
+      const dialogData = new ConfirmDialogModel('RECIPE.CONFIRM_DELETE', 'RECIPE.MESSAGE_DELETE');
+
+      const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+        maxWidth: "400px",
+        data: dialogData
+      });
+
+      dialogRef.afterClosed().subscribe(dialogResult => {
+        if (dialogResult) {
+          this.api.deleteById('recipes', recipe._id).subscribe(x => {
+            this.snackBar.open(this.translate.instant('RECIPE.DELETED'));
+            this.loadRecipes();
+          });
+        }
+      });
+    }
   }
 }

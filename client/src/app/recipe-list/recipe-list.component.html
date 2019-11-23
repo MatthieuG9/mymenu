@@ -5,5 +5,8 @@
         <button mat-icon-button [routerLink]="recipe.editLink">
             <mat-icon>edit</mat-icon>
         </button>
+        <button mat-icon-button (click)="delete(recipe)">
+            <mat-icon>delete</mat-icon>
+        </button>
     </mat-list-item>
 </mat-nav-list>

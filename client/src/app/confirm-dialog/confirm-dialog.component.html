@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>
+    {{title | translate}}
+</h1>
+
+<div mat-dialog-content>
+    <p>{{message | translate}}</p>
+</div>
+
+<div mat-dialog-actions>
+    <button mat-button (click)="onDismiss()">{{no | translate}}</button>
+    <button mat-raised-button color="primary" (click)="onConfirm()">{{yes | translate}}</button>
+</div>

@@ -7,7 +7,10 @@
         "LINK": "Link (http://marmiton...)",
         "INSTRUCTION": "Direction",
         "DURATION": "Preparation time",
-        "SERVING": "Servings"
+        "SERVING": "Servings",
+        "CONFIRM_DELETE": "Recipe delete",
+        "MESSAGE_DELETE": "Do you really want to delete this recipe ?",
+        "DELETED": "Recipe deleted"
     },
     "INGREDIENT": {
         "ADD": "New ingredient",

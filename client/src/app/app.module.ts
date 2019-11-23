@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatCardModule, MatRadioModule, MatFormFieldModule, MatInputModule, MatIconModule, MatAutocompleteModule, MatSelectModule, MatProgressSpinnerModule, MatDialogModule, MatSliderModule, MatListModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatRadioModule, MatFormFieldModule, MatInputModule, MatIconModule, MatAutocompleteModule, MatSelectModule, MatProgressSpinnerModule, MatDialogModule, MatSliderModule, MatListModule, MatSnackBarModule } from '@angular/material';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateService, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -18,6 +18,7 @@ import { ApiModule } from 'src/api/api.module';
 import { RecipeIngredientFormComponent } from './recipe-ingredient-form/recipe-ingredient-form.component';
 import { NewIngredientDialogComponent } from './new-ingredient-dialog/new-ingredient-dialog.component';
 import { RecipeListComponent } from './recipe-list/recipe-list.component';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -31,7 +32,8 @@ export function createTranslateLoader(http: HttpClient) {
     AddEditRecipeComponent,
     RecipeIngredientFormComponent,
     NewIngredientDialogComponent,
-    RecipeListComponent
+    RecipeListComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +54,7 @@ export function createTranslateLoader(http: HttpClient) {
     MatDialogModule,
     MatSliderModule,
     MatListModule,
+    MatSnackBarModule,
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {
@@ -64,7 +67,8 @@ export function createTranslateLoader(http: HttpClient) {
     ApiModule
   ],
   entryComponents: [
-    NewIngredientDialogComponent
+    NewIngredientDialogComponent,
+    ConfirmDialogComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

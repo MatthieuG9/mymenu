@@ -142,8 +142,12 @@ export class ApiService {
       );
   }
 
-  deleteById(url: string, id: string | number) {
-    return this.deleteRaw(url + "/" + id);
+  deleteById(url: string, id: string | number, options?: any) {
+    let sendOptions = this.options;
+    if (options) {
+      sendOptions = _.extend({}, this.options, options);
+    }
+    return this.deleteRaw(url + "/" + id, sendOptions);
   }
 
   deleteRaw(url: string, options?: any): Observable<any> {
