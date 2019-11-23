@@ -46,7 +46,7 @@ export class RecipeIngredientFormComponent implements OnInit, OnChanges {
 
   startListenIngredientSearchInput() {
     this.searchInput.valueChanges.pipe(
-      filter(value => _.isString(value) && value.length > 3),
+      filter(value => _.isString(value) && value.length > 2),
       debounceTime(600),
       distinctUntilChanged(),
       tap(() => {

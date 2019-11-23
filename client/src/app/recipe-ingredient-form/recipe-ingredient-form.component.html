@@ -2,9 +2,9 @@
     <mat-form-field>
         <input type="text" placeholder="{{ 'SEARCH.INGREDIENT' | translate}}" [formControl]="searchInput" matInput
             [matAutocomplete]="auto" [(value)]="searchValue">
-        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayIngredient">
-            <mat-option *ngFor="let ingredient of filteredIngredients | async" [value]="ingredient"
-                (optionSelected)="selectIngredient($event)">
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayIngredient"
+            (optionSelected)="selectIngredient($event)">
+            <mat-option *ngFor="let ingredient of filteredIngredients | async" [value]="ingredient">
                 {{ingredient.name}}
             </mat-option>
             <mat-option *ngIf="isLoading" class="is-loading">
