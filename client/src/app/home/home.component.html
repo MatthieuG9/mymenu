@@ -1,5 +1,7 @@
 <p>home works!</p>
 
 <div class="example-button-row">
-    <button mat-raised-button color="primary" routerLink="/recipe/add" >{{ 'ADD_RECIPE' | translate }}</button>
+    <button mat-raised-button color="primary" routerLink="/recipe/add">{{ 'ADD_RECIPE' | translate }}</button>
 </div>
+
+<app-recipe-list [limit]="maxRecipe"></app-recipe-list>

@@ -53,9 +53,13 @@ export class ApiService {
     return this.get(Ingredient, url);
   }
 
+  findIngredient(id: string) {
+    return this.getOne(Ingredient, 'ingredients/' + id);
+  }
+
   save<T>(T: new (any?) => T, url: string, data: T, options?: any) {
     if ((data as any)._id) {
-      return this.updateOne<T>(T, url, data, options);
+      return this.updateOne<T>(T, url + '/' + (data as any)._id, data, options);
     } else {
       return this.postOne<T>(T, url, data, options);
     }

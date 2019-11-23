@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatCardModule, MatRadioModule, MatFormFieldModule, MatInputModule, MatIconModule, MatAutocompleteModule, MatSelectModule, MatProgressSpinnerModule, MatDialogModule, MatSliderModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatRadioModule, MatFormFieldModule, MatInputModule, MatIconModule, MatAutocompleteModule, MatSelectModule, MatProgressSpinnerModule, MatDialogModule, MatSliderModule, MatListModule } from '@angular/material';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateService, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -17,6 +17,7 @@ import { AuthModule } from 'src/auth/auth.module';
 import { ApiModule } from 'src/api/api.module';
 import { RecipeIngredientFormComponent } from './recipe-ingredient-form/recipe-ingredient-form.component';
 import { NewIngredientDialogComponent } from './new-ingredient-dialog/new-ingredient-dialog.component';
+import { RecipeListComponent } from './recipe-list/recipe-list.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -29,7 +30,8 @@ export function createTranslateLoader(http: HttpClient) {
     LoginComponent,
     AddEditRecipeComponent,
     RecipeIngredientFormComponent,
-    NewIngredientDialogComponent
+    NewIngredientDialogComponent,
+    RecipeListComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +51,7 @@ export function createTranslateLoader(http: HttpClient) {
     MatProgressSpinnerModule,
     MatDialogModule,
     MatSliderModule,
+    MatListModule,
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {

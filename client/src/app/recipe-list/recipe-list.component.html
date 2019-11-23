@@ -1,0 +1,9 @@
+<mat-nav-list>
+    <mat-list-item *ngFor="let recipe of datas | async">
+        <a matLine *ngIf="recipe.type === 'link'" target="_blank" [href]="recipe.link"> {{ recipe.name }} </a>
+        <a matLine *ngIf="recipe.type === 'details'" [href]="recipe.link"> {{ recipe.name }} </a>
+        <button mat-icon-button [routerLink]="recipe.editLink">
+            <mat-icon>edit</mat-icon>
+        </button>
+    </mat-list-item>
+</mat-nav-list>

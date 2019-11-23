@@ -17,23 +17,35 @@ export interface IRecipeDetails {
 }
 
 export interface IRecipe {
-    _id?: number | string;
-    name: string;
-    ownerId: number | string,
-    type: RecipeType,
-    url?: string,
-    details? : IRecipeDetails
+  _id?: number | string;
+  name: string;
+  ownerId: number | string,
+  type: RecipeType,
+  url?: string,
+  details?: IRecipeDetails
+}
+
+export class Recipe implements IRecipe {
+  _id?: number | string;
+  name: string;
+  ownerId: string | number;
+  type: RecipeType;
+  url?: string;
+  details?: IRecipeDetails;
+
+  constructor(values: Object = {}) {
+    Object.assign(this, values);
   }
-  
-  export class Recipe implements IRecipe {
-    _id?: number | string;
-    name: string;
-    ownerId: string | number;
-    type: RecipeType;
-    url?: string;
-    details?: IRecipeDetails;
-    
-    constructor(values: Object = {}) {
-      Object.assign(this, values);
-    }
+
+  get link(): string {
+    return this.type === RecipeType.link ? this.url : '/recipe/' + this._id + '/show';
   }
+
+  get editLink(): string {
+    return '/recipe/' + this._id + '/edit';
+  }
+
+  get linkTarget(): string {
+    return this.type === RecipeType.link ? '_blank' : '_selft';
+  }
+}

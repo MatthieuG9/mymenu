@@ -42,6 +42,15 @@ export class RecipeIngredientFormComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     this.formGroup = this.formArray && this.formArray.get(this.formArrayIndex.toString()) as FormGroup || null;
     this.ready = !!this.formGroup;
+
+    this.reloadIngredient();
+  }
+
+  reloadIngredient() {
+    let ingredientId = this.formGroup.get('ingredientId').value;
+    if (this.ready && ingredientId) {
+      this.api.findIngredient(ingredientId).subscribe(this.patchWithIngredient.bind(this));
+    }
   }
 
   startListenIngredientSearchInput() {
@@ -80,15 +89,17 @@ export class RecipeIngredientFormComponent implements OnInit, OnChanges {
       data: { name: this.searchInput.value }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.searchValue = result.name;
-        this.formGroup.patchValue({
-          ingredientId: result._id
-        });
-        this.changeDetectorRef.markForCheck();
-      }
-    });
+    dialogRef.afterClosed().subscribe(this.patchWithIngredient.bind(this));
+  }
+
+  patchWithIngredient(ingredient: IIngredient) {
+    if (ingredient) {
+      this.searchValue = ingredient.name;
+      this.formGroup.patchValue({
+        ingredientId: ingredient._id
+      });
+      this.changeDetectorRef.markForCheck();
+    }
   }
 
 }

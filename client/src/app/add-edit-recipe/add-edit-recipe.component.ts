@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import { ApiService } from 'src/api/api.service';
 import { Recipe, IRecipe, RecipeType, IRecipeDetails } from 'src/models/recipe';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-add-edit-recipe',
@@ -16,12 +16,13 @@ export class AddEditRecipeComponent implements OnInit {
 
   public mainForm: FormGroup;
   public maxDuration = 180;
+  public currentRecipe: Recipe;
 
   constructor(
+    private route: ActivatedRoute,
     private fb: FormBuilder,
     private router: Router,
     private api: ApiService) {
-    this.buildFormGroup();
   }
 
   get duration(): number {
@@ -33,7 +34,11 @@ export class AddEditRecipeComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.currentRecipe = this.route.snapshot.data['recipe'];
+    this.buildFormGroup();
+    if (this.currentRecipe) {
+      this.patchFormGroup();
+    }
   }
 
   buildFormGroup() {
@@ -57,6 +62,22 @@ export class AddEditRecipeComponent implements OnInit {
         instructions: [{ content: '' }]
       }
     });
+  }
+
+  patchFormGroup() {
+    if (this.currentRecipe.details) {
+      if (this.currentRecipe.details.instructions) {
+        for (let i = 0; i < this.currentRecipe.details.instructions.length - 1; i++) {
+          this.getFormArray('instructions').push(this.buildInstructionForm());
+        }
+      }
+      if (this.currentRecipe.details.ingredients) {
+        for (let i = 0; i < this.currentRecipe.details.ingredients.length - 1; i++) {
+          this.getFormArray('ingredients').push(this.buildIngredientForm());
+        }
+      }
+    }
+    this.mainForm.patchValue(this.currentRecipe);
   }
 
   buildInstructionForm(): FormGroup {
@@ -91,7 +112,7 @@ export class AddEditRecipeComponent implements OnInit {
 
   save() {
     let data = this.clean(this.mainForm.value);
-    this.api.save<Recipe>(Recipe, 'recipes', data)
+    this.api.save<Recipe>(Recipe, 'recipes', data as Recipe)
       .subscribe((result) => {
         console.log('Recipe saved', result);
         this.router.navigate(['/']);
@@ -105,6 +126,9 @@ export class AddEditRecipeComponent implements OnInit {
     } else {
       delete result.url;
       result.details = this.cleanRecipeDetails(result.details);
+    }
+    if (this.currentRecipe) {
+      result._id = this.currentRecipe._id;
     }
     return result;
   }
