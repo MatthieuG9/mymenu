@@ -4,9 +4,10 @@ import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
 import { tap, filter } from 'rxjs/operators';
 import * as _ from 'lodash';
+import { AuthModule } from './auth.module';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: AuthModule
 })
 export class AuthGuard implements CanActivate {
   constructor(
@@ -16,7 +17,7 @@ export class AuthGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     return this.authService.authentificated.pipe(
-      filter( x => _.isBoolean(x) ),
+      filter(x => _.isBoolean(x)),
       tap(authenticated => {
         if (!authenticated) {
           this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });

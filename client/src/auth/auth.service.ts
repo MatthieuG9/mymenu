@@ -5,9 +5,10 @@ import { map, catchError } from 'rxjs/operators';
 import * as _ from 'lodash';
 import { IUser } from 'src/models/user';
 import { environment } from 'src/environments/environment.prod';
+import { AuthModule } from './auth.module';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: AuthModule
 })
 export class AuthService {
 
@@ -36,17 +37,15 @@ export class AuthService {
         return this.get('accessToken');
     }
 
-    protected getTokenFromCurrentUrl():string | undefined {
+    protected getTokenFromCurrentUrl(): string | undefined {
         let url = decodeURIComponent(window.location.href);
         let result = url.match(/\#access_token\=([^&]*)/);
         return result && result.length > 1 && result[1];
     }
 
-    protected refreshToken()
-    {
+    protected refreshToken() {
         let token = this.getTokenFromCurrentUrl();
-        if(token)
-        {
+        if (token) {
             this.store('accessToken', token);
         }
     }
@@ -59,13 +58,13 @@ export class AuthService {
         this.refreshToken();
         let token = this.getToken();
         return this.http.get(environment.apiUrl + 'users',
-        {
-            headers: {
-                Authorization: 'Bearer '+token 
-            }
-        })
+            {
+                headers: {
+                    Authorization: 'Bearer ' + token
+                }
+            })
             .pipe(
-                map(x => !!_.get(x,'data[0]._id',false)),
+                map(x => !!_.get(x, 'data[0]._id', false)),
                 catchError(x => of(false))
             )
     }

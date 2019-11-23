@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { throwError, Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Ingredient } from 'src/models/ingredient';
+import { ApiModule } from './api.module';
 
 export interface ApiFeathersResponse<T> {
   data: T[],
@@ -15,7 +16,7 @@ export interface ApiFeathersResponse<T> {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: ApiModule
 })
 export class ApiService {
 

@@ -4,9 +4,19 @@ import { HomeComponent } from './home/home.component';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { LoginComponent } from './login/login.component';
 import { AddEditRecipeComponent } from './add-edit-recipe/add-edit-recipe.component';
+import { RecipeResolver } from 'src/api/recipe.resolver';
 
 
-const routes: Routes = [  
+const routes: Routes = [
+  {
+    path: 'recipe/:id/edit',
+    component: AddEditRecipeComponent,
+    pathMatch: "full",
+    canActivate: [AuthGuard],
+    resolve: {
+      recipe: RecipeResolver
+    }
+  },
   {
     path: 'recipe/add',
     component: AddEditRecipeComponent,
@@ -22,7 +32,7 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
-  },   
+  },
   {
     path: '**',
     redirectTo: ''
