@@ -5,7 +5,9 @@
     "RECIPE": {
         "NAME": "Recipe name",
         "LINK": "Link (http://marmiton...)",
-        "INSTRUCTION": "Instruction"
+        "INSTRUCTION": "Direction",
+        "DURATION": "Preparation time",
+        "SERVING": "Servings"
     },
     "INGREDIENT": {
         "ADD": "New ingredient",

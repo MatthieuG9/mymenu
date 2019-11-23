@@ -9,37 +9,39 @@ export default function (app: Application) {
   const { Schema } = mongooseClient;
 
   const instructions = new Schema({
-    content: { type: String, required: true}
-  },{ _id: false, autoIndex: false });
+    content: { type: String, required: true }
+  }, { _id: false, autoIndex: false });
 
   const ingredients = new Schema({
-    ingredientId : { type: Schema.Types.ObjectId, ref: 'ingredients' },
-    quantity: { type: Number, required: true},
-    unit: { type: String, required: true, enum: ['unit', 'g', 'ml'], default: 'unit'}
-  },{ _id: false, autoIndex: false });
+    ingredientId: { type: Schema.Types.ObjectId, ref: 'ingredients' },
+    quantity: { type: Number, required: true },
+    unit: { type: String, required: true, enum: ['unit', 'g', 'ml'], default: 'unit' }
+  }, { _id: false, autoIndex: false });
 
   const details = new Schema({
-    instructions: [ instructions ],
-    ingredients: [ ingredients ]
+    instructions: [instructions],
+    ingredients: [ingredients]
   }, { _id: false, autoIndex: false });
 
   const recipes = new Schema({
     name: { type: String, required: true },
     ownerId: { type: Schema.Types.ObjectId, ref: 'users', required: true },
-    type: { 
-      type: String, 
-      required: true, 
-      enum: ['link','details'] 
+    duration: { type: Number, required: true, default: 10, min: 1 },
+    serving: { type: Number, required: true, default: 1, min: 1 },
+    type: {
+      type: String,
+      required: true,
+      enum: ['link', 'details']
     },
-    url: { 
-      type: String, 
-      required: function(this:any) {
+    url: {
+      type: String,
+      required: function (this: any) {
         return this.type == 'link';
-      }  
+      }
     },
     details: {
       type: details,
-      required: function(this:any) {
+      required: function (this: any) {
         return this.type == 'details'
       }
     },

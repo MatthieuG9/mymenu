@@ -15,12 +15,21 @@ import { Router } from '@angular/router';
 export class AddEditRecipeComponent implements OnInit {
 
   public mainForm: FormGroup;
+  public maxDuration = 180;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private api: ApiService) {
     this.buildFormGroup();
+  }
+
+  get duration(): number {
+    return this.mainForm && this.mainForm.get('duration').value;
+  }
+
+  set duration(val: number) {
+    this.mainForm && this.mainForm.patchValue({ duration: val });
   }
 
   ngOnInit() {
@@ -30,6 +39,8 @@ export class AddEditRecipeComponent implements OnInit {
   buildFormGroup() {
     this.mainForm = this.fb.group({
       name: ['', Validators.required],
+      duration: [10, [Validators.min(1), Validators.max(this.maxDuration)]],
+      serving: [4, Validators.min(1)],
       type: ['link', Validators.required],
       url: ['', RxwebValidators.required({
         conditionalExpression: (x) => x.type == 'link'
