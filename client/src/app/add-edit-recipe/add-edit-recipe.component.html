@@ -19,6 +19,20 @@
             </mat-form-field>
         </div>
         <div [hidden]="typeIsLink()" formGroupName="details">
+
+            <div formArrayName="ingredients">
+                <div *ngFor="let ingredient of mainForm.controls.details.controls.ingredients.controls; let i=index">
+                    <app-recipe-ingredient-form [formArray]="mainForm.controls.details.controls.ingredients"
+                        [formArrayIndex]="i"></app-recipe-ingredient-form>
+                    <button mat-icon-button aria-label="Add instruction" (click)="addRow('ingredients',i)">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                    <button mat-icon-button aria-label="Add instruction" (click)="removeRow('ingredients',i)">
+                        <mat-icon>remove</mat-icon>
+                    </button>
+                </div>
+            </div>
+
             <div formArrayName="instructions">
                 <div *ngFor="let instruction of mainForm.controls.details.controls.instructions.controls; let i=index"
                     [formGroupName]="i">
@@ -29,19 +43,6 @@
                         <mat-icon>add</mat-icon>
                     </button>
                     <button mat-icon-button aria-label="Add instruction" (click)="removeRow('instructions',i)">
-                        <mat-icon>remove</mat-icon>
-                    </button>
-                </div>
-            </div>
-
-            <div formArrayName="ingredients">
-                <div *ngFor="let ingredient of mainForm.controls.details.controls.ingredients.controls; let i=index">
-                    <app-recipe-ingredient-form [formArray]="mainForm.controls.details.controls.ingredients"
-                        [formArrayIndex]="i"></app-recipe-ingredient-form>
-                    <button mat-icon-button aria-label="Add instruction" (click)="addRow('ingredients',i)">
-                        <mat-icon>add</mat-icon>
-                    </button>
-                    <button mat-icon-button aria-label="Add instruction" (click)="removeRow('ingredients',i)">
                         <mat-icon>remove</mat-icon>
                     </button>
                 </div>

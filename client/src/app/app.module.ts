@@ -19,6 +19,7 @@ import { RecipeIngredientFormComponent } from './recipe-ingredient-form/recipe-i
 import { NewIngredientDialogComponent } from './new-ingredient-dialog/new-ingredient-dialog.component';
 import { RecipeListComponent } from './recipe-list/recipe-list.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { ShowRecipeComponent } from './show-recipe/show-recipe.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -33,7 +34,8 @@ export function createTranslateLoader(http: HttpClient) {
     RecipeIngredientFormComponent,
     NewIngredientDialogComponent,
     RecipeListComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    ShowRecipeComponent
   ],
   imports: [
     BrowserModule,

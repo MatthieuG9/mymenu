@@ -15,7 +15,13 @@ export class RecipeResolver implements Resolve<Recipe> {
     resolve(
         route: ActivatedRouteSnapshot
     ): Observable<any> | Promise<any> {
-        return this.api.getOne(Recipe, 'recipes/' + route.params.id);
+        let options: any = {};
+        if (route.data['populate']) {
+            options.params = {
+                $populate: true
+            };
+        }
+        return this.api.getOne(Recipe, 'recipes/' + route.params.id, options);
     }
 
 }
