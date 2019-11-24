@@ -3,6 +3,7 @@ import { setField } from 'feathers-authentication-hooks';
 import { softDelete2, fastJoin } from 'feathers-hooks-common';
 import FixSoftDelete404 from '../../common/fix-404';
 import { HookContext } from '@feathersjs/feathers';
+import search from 'feathers-mongodb-fuzzy-search';
 // Don't remove this comment. It's needed to format import lines nicely.
 
 const { authenticate } = authentication.hooks;
@@ -38,7 +39,12 @@ export default {
       authenticate('jwt'),
       softDelete2()
     ],
-    find: [filterByOwnerId],
+    find: [
+      search({
+        fields: ['name']
+      }),
+      filterByOwnerId
+    ],
     get: [filterByOwnerId],
     create: [setOwnerInBody],
     update: [filterByOwnerId],

@@ -4,4 +4,7 @@
     <button mat-raised-button color="primary" routerLink="/recipe/add">{{ 'ADD_RECIPE' | translate }}</button>
 </div>
 
-<app-recipe-list [limit]="maxRecipe"></app-recipe-list>
+<div>
+    <app-recipe-list [limit]="maxRecipe" showSearchBar="false"></app-recipe-list>
+    <a routerLink="/recipes">{{'RECIPE.VIEW_MORE' | translate }}</a>
+</div>

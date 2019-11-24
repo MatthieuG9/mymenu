@@ -10,7 +10,9 @@
         "SERVING": "Portions",
         "CONFIRM_DELETE": "Suppression de la recette",
         "MESSAGE_DELETE": "Êtes-vous sûre de vouloir supprimer cette recette ?",
-        "DELETED": "Recette supprimée"
+        "DELETED": "Recette supprimée",
+        "SEARCH": "Rechercher une recette",
+        "VIEW_MORE": "Voir plus de recettes"
     },
     "INGREDIENT": {
         "ADD": "Ajouter un ingrédient",

@@ -10,7 +10,9 @@
         "SERVING": "Servings",
         "CONFIRM_DELETE": "Recipe delete",
         "MESSAGE_DELETE": "Do you really want to delete this recipe ?",
-        "DELETED": "Recipe deleted"
+        "DELETED": "Recipe deleted",
+        "SEARCH": "Search recipe",
+        "VIEW_MORE": "More recipes"
     },
     "INGREDIENT": {
         "ADD": "New ingredient",

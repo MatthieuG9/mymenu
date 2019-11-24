@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { AddEditRecipeComponent } from './add-edit-recipe/add-edit-recipe.component';
 import { RecipeResolver } from 'src/api/recipe.resolver';
 import { ShowRecipeComponent } from './show-recipe/show-recipe.component';
+import { RecipeListComponent } from './recipe-list/recipe-list.component';
 
 
 const routes: Routes = [
@@ -31,6 +32,12 @@ const routes: Routes = [
   {
     path: 'recipe/add',
     component: AddEditRecipeComponent,
+    pathMatch: "full",
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'recipes',
+    component: RecipeListComponent,
     pathMatch: "full",
     canActivate: [AuthGuard]
   },
