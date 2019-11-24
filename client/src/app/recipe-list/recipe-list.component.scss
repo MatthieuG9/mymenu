@@ -1,0 +1,84 @@
+@import '../../styles.scss';
+
+.search-wrapper {
+    margin: $margin 0;
+    width: 100%;
+    display: flex;
+    place-content: center center;
+
+    mat-form-field {
+        width: 80%;
+        max-width: 500px;
+        text-align: center;
+        font-size: 1.5em;
+    }
+}
+
+mat-nav-list {
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+
+    mat-list-item {
+        min-height: 60px;
+        height: auto!important;
+        h3 {
+            font-weight: normal;
+
+        }
+        .duration {
+            display: flex;
+            flex-direction: row;
+            margin-right: $margin * 2;
+            height: 100%;
+            align-items: center;
+            mat-icon {
+                height: 40px;
+                width: auto;
+                font-size: 2em;
+                padding-top: 5px;
+            }
+            .value {
+                margin-left: $smallMargin;
+                font-size: 1.2em;
+            }
+        }
+        .action {
+            color: $grey;
+            height: 100%;
+        }
+        .duration,.action {
+            margin-bottom: $smallMargin;
+        }
+    }
+}
+
+@media (max-width: $sm) {
+
+    ::ng-deep {
+        #recipes {
+        
+            mat-list-item {
+                .mat-list-item-content {
+                    flex-flow: row wrap;
+                    justify-content: space-between;
+                    .mat-list-text {
+                        flex: 0 0 100%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: $sm) {
+    mat-nav-list {
+
+        mat-list-item {
+            .action {
+                display: flex;
+                flex-direction: row;
+            }
+        }
+    }
+}

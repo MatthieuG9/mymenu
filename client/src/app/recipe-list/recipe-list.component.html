@@ -1,15 +1,30 @@
-<mat-form-field *ngIf="showSearchBar">
-    <input [formControl]="searchInput" matInput placeholder="{{ 'RECIPE.SEARCH' | translate }}">
-</mat-form-field>
-<mat-nav-list>
-    <mat-list-item *ngFor="let recipe of datas | async">
-        <a matLine *ngIf="recipe.type === 'link'" target="_blank" [href]="recipe.link"> {{ recipe.name }} </a>
-        <a matLine *ngIf="recipe.type === 'details'" [href]="recipe.link"> {{ recipe.name }} </a>
-        <button mat-icon-button [routerLink]="recipe.editLink">
-            <mat-icon>edit</mat-icon>
-        </button>
-        <button mat-icon-button (click)="delete(recipe)">
-            <mat-icon>delete</mat-icon>
-        </button>
-    </mat-list-item>
+<div *ngIf="showSearchBar" class="search-wrapper">
+    <mat-form-field>
+        <input [formControl]="searchInput" matInput placeholder="{{ 'RECIPE.SEARCH' | translate }}">
+    </mat-form-field>
+</div>
+<mat-nav-list id="recipes">
+    <div *ngFor="let recipe of datas | async">
+        <mat-list-item>
+            <a matLine *ngIf="recipe.type === 'link'" target="_blank" [href]="recipe.link">
+                <h3>{{ recipe.name }}</h3>
+            </a>
+            <a matLine *ngIf="recipe.type === 'details'" [routerLink]="recipe.link">
+                <h3>{{ recipe.name }}</h3>
+            </a>
+            <div class="duration">
+                <mat-icon>timer</mat-icon>
+                <span class="value">{{recipe.duration}}</span>
+            </div>
+            <div class="action">
+                <button mat-icon-button [routerLink]="recipe.editLink">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button (click)="delete(recipe)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+    </div>
 </mat-nav-list>

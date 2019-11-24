@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import { Component, OnInit, Input, ChangeDetectionStrategy, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy, OnChanges, SimpleChanges, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ApiService } from 'src/api/api.service';
 import { BehaviorSubject, Subscription } from 'rxjs';
