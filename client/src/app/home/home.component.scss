@@ -1,0 +1,30 @@
+@import '../../styles.scss';
+
+.recipes-wrapper {
+    .header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        h2 {
+            margin-left: $margin;
+            color: $darkGrey;
+        }
+        .action {
+            margin: $bigMargin $margin;
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
+    
+    .view-more {
+        display: block;
+        color: $grey;
+        margin-top: $bigMargin;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        text-decoration: none;
+    }
+}

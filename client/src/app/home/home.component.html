@@ -1,10 +1,11 @@
-<p>home works!</p>
+<div class="recipes-wrapper boxed">
+    <div class="header">
+        <h2>{{ 'RECIPE.LAST' | translate }}</h2>
+        <div class="action boxed">
+            <button mat-raised-button color="primary" routerLink="/recipe/add">{{ 'ADD_RECIPE' | translate }}</button>
+        </div>
+    </div>
 
-<div class="example-button-row">
-    <button mat-raised-button color="primary" routerLink="/recipe/add">{{ 'ADD_RECIPE' | translate }}</button>
-</div>
-
-<div>
     <app-recipe-list [limit]="maxRecipe" showSearchBar="false"></app-recipe-list>
-    <a routerLink="/recipes">{{'RECIPE.VIEW_MORE' | translate }}</a>
+    <a routerLink="/recipes" class="view-more">{{'RECIPE.VIEW_MORE' | translate }}</a>
 </div>

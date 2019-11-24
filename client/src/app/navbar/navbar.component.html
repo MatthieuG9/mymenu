@@ -1,5 +1,8 @@
 <nav id="navbar" class="mat-elevation-z6">
     <div class="left">
+        <h1 *ngIf="!showBack">
+            My Menu App
+        </h1>
         <button *ngIf="showBack" mat-button class="back" (click)="back()">
             <mat-icon aria-hidden="false" aria-label="Back">keyboard_arrow_left</mat-icon>
             {{ 'BACK' | translate }}

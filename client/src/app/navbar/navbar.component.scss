@@ -3,15 +3,20 @@
 #navbar {
     display: flex;
     flex-direction: row;
-    padding: $smallMargin;
+    padding: $smallMargin $margin;
     place-content: end space-between;
     align-items: center;
     background-color: $accentColor;
 
     .left {
+        h1, .back {
+            color: $lightGrey;
+        }
+        h1 {
+            margin: 0;
+        }
         .back {
             padding: 0 $smallMargin 0 0;
-            color: $lightGrey;
         }
     }
 
@@ -20,7 +25,7 @@
         flex-direction: row;
 
         > div {
-            margin-left: $smallMargin;
+            margin-left: $margin;
             display: flex;
             align-items: center;
         }

@@ -14,7 +14,8 @@
         "MESSAGE_DELETE": "Do you really want to delete this recipe ?",
         "DELETED": "Recipe deleted",
         "SEARCH": "Search recipe",
-        "VIEW_MORE": "More recipes"
+        "VIEW_MORE": "More recipes",
+        "LAST": "Last recipes"
     },
     "INGREDIENT": {
         "ADD": "New ingredient",
