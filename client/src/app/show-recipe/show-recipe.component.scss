@@ -1,0 +1,47 @@
+@import '../../styles.scss';
+
+.recipe-wrapper {
+    color: $darkGrey;
+
+    .info {
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        font-size: 1.6em;
+        margin-bottom: $bigMargin;
+
+        > div {
+            display: flex;
+            align-items: center;
+            margin-right: $margin;
+            color: $grey;
+            mat-icon {
+                font-size: 2em;
+                width: auto;
+                height: auto;
+                margin-right: $smallMargin;
+            }
+        }
+    }
+}
+
+@media (max-width: $lg) {
+    .recipe-wrapper {
+        margin-left: $margin;
+        margin-right: $margin;
+    }
+}
+
+@media (min-width: $lg) {
+    .recipe-wrapper {
+        .details {
+            display: flex;
+            flex-direction: row;
+            justify-content: start;
+            > div {
+                min-width: 400px;
+                margin-right: $bigMargin;
+            }
+        }
+    }
+}
