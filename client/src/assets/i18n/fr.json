@@ -1,5 +1,7 @@
 {
     "LOGIN": "Connexion",
+    "LOGOUT": "Déconnexion",
+    "BACK": "Retour",
     "LOGIN_USING_GOOGLE": "Connexion avec Google Id",
     "ADD_RECIPE": "Ajouter une recette",
     "RECIPE": {

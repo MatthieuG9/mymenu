@@ -1,0 +1,21 @@
+<nav>
+    <div class="left">
+        <button mat-button>
+            <mat-icon aria-hidden="false" aria-label="Back">keyboard_arrow_left</mat-icon>
+            {{ 'BACK' | translate }}
+        </button>
+    </div>
+    <div class="rigth">
+        <button mat-button (click)="toggleLanguage()">
+            <img [src]="languageIconUrl" />
+        </button>
+        <div>
+            <ngx-avatar [src]="profileImagePath" name="John Doe" size="48" [round]="true"
+                [matMenuTriggerFor]="userMenu">
+            </ngx-avatar>
+            <mat-menu #userMenu="matMenu">
+                <button mat-menu-item (click)="logout()">{{ 'LOGOUT' | translate }}</button>
+            </mat-menu>
+        </div>
+    </div>
+</nav>

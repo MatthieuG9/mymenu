@@ -1,5 +1,7 @@
 {
     "LOGIN": "Login",
+    "LOGOUT": "Logout",
+    "BACK": "Back",
     "LOGIN_USING_GOOGLE": "Login with Google Id",
     "ADD_RECIPE": "Add recipe",
     "RECIPE": {

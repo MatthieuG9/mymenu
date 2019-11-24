@@ -4,10 +4,11 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatCardModule, MatRadioModule, MatFormFieldModule, MatInputModule, MatIconModule, MatAutocompleteModule, MatSelectModule, MatProgressSpinnerModule, MatDialogModule, MatSliderModule, MatListModule, MatSnackBarModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatRadioModule, MatFormFieldModule, MatInputModule, MatIconModule, MatAutocompleteModule, MatSelectModule, MatProgressSpinnerModule, MatDialogModule, MatSliderModule, MatListModule, MatSnackBarModule, MatMenuModule } from '@angular/material';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateService, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { AvatarModule } from 'ngx-avatar';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { AddEditRecipeComponent } from './add-edit-recipe/add-edit-recipe.component';
@@ -20,6 +21,7 @@ import { NewIngredientDialogComponent } from './new-ingredient-dialog/new-ingred
 import { RecipeListComponent } from './recipe-list/recipe-list.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { ShowRecipeComponent } from './show-recipe/show-recipe.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -35,7 +37,8 @@ export function createTranslateLoader(http: HttpClient) {
     NewIngredientDialogComponent,
     RecipeListComponent,
     ConfirmDialogComponent,
-    ShowRecipeComponent
+    ShowRecipeComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +60,9 @@ export function createTranslateLoader(http: HttpClient) {
     MatSliderModule,
     MatListModule,
     MatSnackBarModule,
+    MatMenuModule,
     HttpClientModule,
+    AvatarModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

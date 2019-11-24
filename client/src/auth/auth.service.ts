@@ -64,7 +64,11 @@ export class AuthService {
                 }
             })
             .pipe(
-                map(x => !!_.get(x, 'data[0]._id', false)),
+                map(result => {
+                    let user = _.get(result, 'data[0]');
+                    this.store('currentUserAuth', user);
+                    return user && !!user._id;
+                }),
                 catchError(x => of(false))
             )
     }
