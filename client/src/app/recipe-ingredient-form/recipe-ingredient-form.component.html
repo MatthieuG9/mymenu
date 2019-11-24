@@ -1,5 +1,5 @@
 <div *ngIf="ready" [formGroup]="formGroup" class="recipe-ingredient-container">
-    <mat-form-field>
+    <mat-form-field class="field name">
         <input type="text" placeholder="{{ 'SEARCH.INGREDIENT' | translate}}" [formControl]="searchInput" matInput
             [matAutocomplete]="auto" [(value)]="searchValue">
         <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayIngredient"
@@ -15,10 +15,10 @@
             </mat-option>
         </mat-autocomplete>
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field class="field quantity">
         <input matInput placeholder="{{ 'QUANTITY' | translate }}" formControlName="quantity" type="number">
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field class="field unit">
         <mat-label>{{ 'UNIT' | translate }}</mat-label>
         <mat-select formControlName="unit">
             <mat-option *ngFor="let unit of units" [value]="unit">

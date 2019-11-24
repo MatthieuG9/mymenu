@@ -1,3 +1,78 @@
-.type-group {
-    display: block;
+@import '../../styles.scss';
+
+.add-edit-recipe {
+    margin-left: $bigMargin;
+    margin-right: $bigMargin;
+    margin-top: $bigMargin;
+
+    .mainForm {
+        display: flex;
+        flex-direction: column;
+
+        .field {
+            margin-bottom: $margin;
+            display: flex;
+            width: 100%;
+
+            &.type-group {
+                flex-direction: column;
+                justify-content: center;
+                margin-top: $bigMargin;
+                margin-bottom: $bigMargin;
+                :first-child {
+                    margin-right: $margin;
+                }
+                mat-radio-button {
+                    margin-bottom: $margin;
+                }
+            }
+            &.slider {
+                flex-direction: column;
+            }
+            &.serving {
+                max-width: 200px;
+            }
+            &.instruction {
+                .content {
+                    flex-grow: 2;
+                }
+            }
+            &.ingredient {
+                app-recipe-ingredient-form {
+                    flex-grow : 2;
+                }
+            }
+        }
+    }
+
+    .action-buttons {
+        margin: $bigMargin 0;
+        display: flex;
+        justify-content: flex-end;
+        > button {
+            margin-left: $margin;
+            min-width: 100px;
+        }
+    }
+}
+
+::ng-deep {
+    .field {
+        .mat-form-field-wrapper {
+            width: 100%;
+        }
+    }
+}
+
+@media (min-width: $sm)
+{
+    .add-edit-recipe {
+        .mainForm {
+            .field {
+                &.type-group {
+                    flex-direction: row;
+                }
+            }
+        }
+    }
 }

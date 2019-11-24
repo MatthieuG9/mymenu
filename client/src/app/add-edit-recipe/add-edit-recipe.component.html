@@ -1,27 +1,31 @@
-<div>
-    <form [formGroup]="mainForm">
-        <mat-form-field>
+<div class="add-edit-recipe boxed">
+    <form class="mainForm" [formGroup]="mainForm">
+        <mat-form-field class="field">
             <input matInput formControlName="name" placeholder="{{ 'RECIPE.NAME' | translate }}">
         </mat-form-field>
-        <mat-slider step="5" thumbLabel="true" [max]="maxDuration" [(ngModel)]="duration"
-            [ngModelOptions]="{standalone: true}">
-        </mat-slider>
-        <mat-form-field>
+        <div class="slider field">
+            <mat-label>{{ 'RECIPE.DURATION' | translate }}</mat-label>
+            <mat-slider class="field" step="5" thumbLabel="true" [max]="maxDuration" [(ngModel)]="duration"
+                [ngModelOptions]="{standalone: true}">
+            </mat-slider>
+        </div>
+        <mat-form-field class="field serving">
             <input type="number" formControlName="serving" matInput placeholder="{{ 'RECIPE.SERVING' | translate }}">
         </mat-form-field>
-        <mat-radio-group class="type-group" formControlName="type">
+        <mat-radio-group class="field type-group" formControlName="type">
             <mat-radio-button value="link">{{ 'REGISTER_LINK' | translate }}</mat-radio-button>
             <mat-radio-button value="details">{{ 'REGISTER_COMPLETE_RECIPE' | translate }}</mat-radio-button>
         </mat-radio-group>
         <div [hidden]="!typeIsLink()">
-            <mat-form-field>
+            <mat-form-field class="field">
                 <input matInput formControlName="url" placeholder="{{'RECIPE.LINK' | translate}}">
             </mat-form-field>
         </div>
         <div [hidden]="typeIsLink()" formGroupName="details">
 
             <div formArrayName="ingredients">
-                <div *ngFor="let ingredient of mainForm.controls.details.controls.ingredients.controls; let i=index">
+                <div *ngFor="let ingredient of mainForm.controls.details.controls.ingredients.controls; let i=index"
+                    class="field ingredient">
                     <app-recipe-ingredient-form [formArray]="mainForm.controls.details.controls.ingredients"
                         [formArrayIndex]="i"></app-recipe-ingredient-form>
                     <button mat-icon-button aria-label="Add instruction" (click)="addRow('ingredients',i)">
@@ -35,8 +39,8 @@
 
             <div formArrayName="instructions">
                 <div *ngFor="let instruction of mainForm.controls.details.controls.instructions.controls; let i=index"
-                    [formGroupName]="i">
-                    <mat-form-field>
+                    [formGroupName]="i" class="field instruction">
+                    <mat-form-field class="content">
                         <input matInput formControlName="content" placeholder="{{'RECIPE.INSTRUCTION' | translate}}">
                     </mat-form-field>
                     <button mat-icon-button aria-label="Add instruction" (click)="addRow('instructions',i)">

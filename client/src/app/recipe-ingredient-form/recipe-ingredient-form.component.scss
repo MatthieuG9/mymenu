@@ -1,0 +1,31 @@
+@import '../../styles.scss';
+
+.recipe-ingredient-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    .field {
+        display: flex;
+        margin-right: $margin;
+
+        &.name {
+            flex: 0 0 100%;
+        }
+
+        &.quantity, &.unit {
+            max-width: 80px;
+        }
+    }
+}
+
+@media (min-width: $sm) {
+    .recipe-ingredient-container {
+        flex-direction: row;
+        .field {
+            &.name {
+                flex: 1 1;
+            }
+        }
+    }
+}
