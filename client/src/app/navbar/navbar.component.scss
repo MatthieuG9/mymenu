@@ -1,0 +1,36 @@
+@import '../../styles.scss';
+
+#navbar {
+    display: flex;
+    flex-direction: row;
+    padding: $smallMargin;
+    place-content: end space-between;
+    align-items: center;
+    background-color: $accentColor;
+
+    .left {
+        .back {
+            padding: 0 $smallMargin 0 0;
+            color: $lightGrey;
+        }
+    }
+
+    .right {
+        display: flex;
+        flex-direction: row;
+
+        > div {
+            margin-left: $smallMargin;
+            display: flex;
+            align-items: center;
+        }
+
+        ngx-avatar:hover {
+            cursor: pointer;
+        }
+
+        .flag {
+            max-height: 20px;
+        }
+    }
+}

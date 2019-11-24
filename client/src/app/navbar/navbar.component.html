@@ -1,14 +1,16 @@
-<nav>
+<nav id="navbar" class="mat-elevation-z6">
     <div class="left">
-        <button mat-button>
+        <button *ngIf="showBack" mat-button class="back" (click)="back()">
             <mat-icon aria-hidden="false" aria-label="Back">keyboard_arrow_left</mat-icon>
             {{ 'BACK' | translate }}
         </button>
     </div>
-    <div class="rigth">
-        <button mat-button (click)="toggleLanguage()">
-            <img [src]="languageIconUrl" />
-        </button>
+    <div class="right">
+        <div>
+            <button mat-button (click)="toggleLanguage()">
+                <img class="flag" [src]="languageIconUrl" />
+            </button>
+        </div>
         <div>
             <ngx-avatar [src]="profileImagePath" name="John Doe" size="48" [round]="true"
                 [matMenuTriggerFor]="userMenu">

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/auth/auth.service';
 import { TranslateService } from '@ngx-translate/core';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -23,17 +25,28 @@ export class NavbarComponent implements OnInit {
     }
   ];
   selectedLanguageIndex: number = 1;
+  showBack = false;
 
   get language() {
     return this.languages[this.selectedLanguageIndex];
   }
 
   get languageIconUrl() {
-    return '/assets/images/flags/' + this.language.flag + '.png';
+    return '/assets/images/flags/' + this.language.flag + '.svg';
   }
 
-  constructor(private translate: TranslateService, private auth: AuthService) {
+  constructor(
+    private location: Location,
+    private router: Router,
+    private translate: TranslateService,
+    private auth: AuthService
+  ) {
+    this.showBack = !this.location.isCurrentPathEqualTo('/');
     this.selectedLanguageIndex = this.languages.findIndex((v) => v.id == this.translate.currentLang);
+
+    router.events.subscribe(() => {
+      this.showBack = !this.location.isCurrentPathEqualTo('/');
+    });
   }
 
   ngOnInit() {
@@ -45,6 +58,10 @@ export class NavbarComponent implements OnInit {
         this.profileImagePath = '';
       }
     });
+  }
+
+  back() {
+    this.location.back();
   }
 
   toggleLanguage() {
