@@ -9,7 +9,7 @@
   "authentication": {
     "entity": "user",
     "service": "users",
-    "secret": "R2WRZfe2hwnlsM5B14Dd2S439Ic=",
+    "secret": "yoursecret",
     "authStrategies": [
       "jwt",
       "local"
@@ -30,8 +30,8 @@
     "oauth": {
       "redirect": "http://localhost:4200/",
       "google": {
-        "key": "add your token",
-        "secret": "and your secret",
+        "key": "googleapikey",
+        "secret": "googlescret",
         "scope": [
           "email",
           "profile",

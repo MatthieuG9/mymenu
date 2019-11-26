@@ -1,0 +1,15 @@
+{
+    "host": "HOST",
+    "port": "PORT",
+    "authentication": {
+        "secret": "SECRET",
+        "oauth": {
+            "redirect": "OAUTH_REDIRECT",
+            "google": {
+                "key": "GOOGLE_KEY",
+                "secret": "GOOGLE_SECRET",
+            }
+        }
+    },
+    "mongodb": "MONGODB_URL"
+}
