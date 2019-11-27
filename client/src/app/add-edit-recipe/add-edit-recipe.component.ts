@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import { ApiService } from 'src/api/api.service';
 import { Recipe, IRecipe, RecipeType, IRecipeDetails } from 'src/models/recipe';
@@ -18,19 +18,27 @@ export class AddEditRecipeComponent implements OnInit {
   public maxDuration = 180;
   public currentRecipe: Recipe;
 
-  constructor(
-    private route: ActivatedRoute,
-    private fb: FormBuilder,
-    private router: Router,
-    private api: ApiService) {
-  }
-
   get duration(): number {
     return this.mainForm && this.mainForm.get('duration').value;
   }
 
   set duration(val: number) {
     this.mainForm && this.mainForm.patchValue({ duration: val });
+  }
+
+  get instructionsControl(): FormArray {
+    return this.getFormArray('instructions') as FormArray;
+  }
+
+  get ingredientsControl(): FormArray {
+    return this.getFormArray('ingredients') as FormArray;
+  }
+
+  constructor(
+    private route: ActivatedRoute,
+    private fb: FormBuilder,
+    private router: Router,
+    private api: ApiService) {
   }
 
   ngOnInit() {

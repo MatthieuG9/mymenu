@@ -1,0 +1,39 @@
+version: '3.7'
+
+services:
+  mymenu-client:
+    image: mymenu-client
+    build: 
+      context: ./client
+      args:
+        ANGULAR_ENV: staging
+    ports:
+    - "8080:8080"
+  mymenu-server:
+    image: mymenu-server
+    build: 
+      context: ./server
+    environment: 
+      - HOST=0.0.0.0
+      - PORT=3000
+      - OAUTH_HOST=localhost:3000
+      - OAUTH_REDIRECT=http://localhost:8080
+      - SECRET="R2WRZfe2hwnlsM5B14Dd2S439Ic="
+      - GOOGLE_KEY=567741638508-5uukk0lp3tgcmr7l6vi3m23hi4tjdj7r.apps.googleusercontent.com
+      - GOOGLE_SECRET=CF9sI_pi7vzQkI2On5SNJNFO
+      - MONGODB_URL=mongodb://mongo:27017/menu
+      - DEBUG=*
+    links:
+    - mongo
+    ports:
+    - "3000:3000"
+  mongo:
+    image: mongo:4
+    volumes:
+      - ./data:/data/db
+    expose:
+    - "27017"
+    environment: 
+      - MONGO_INITDB_DATABASE=menu
+  
+

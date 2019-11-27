@@ -5,9 +5,12 @@
         "secret": "SECRET",
         "oauth": {
             "redirect": "OAUTH_REDIRECT",
+            "defaults": {
+                "host": "OAUTH_HOST"
+            },
             "google": {
                 "key": "GOOGLE_KEY",
-                "secret": "GOOGLE_SECRET",
+                "secret": "GOOGLE_SECRET"
             }
         }
     },

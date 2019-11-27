@@ -13,10 +13,10 @@ declare module './declarations' {
 
 class GoogleStrategy extends OAuthStrategy {
   async getEntityData(profile: OAuthProfile, existing: any, params: Params) {
-  
+
     // this will set 'googleId'
     const baseData = await super.getEntityData(profile, existing, params);
-    
+
     // this will grab the picture and email address of the Google profile
     return {
       ...baseData,
@@ -26,7 +26,7 @@ class GoogleStrategy extends OAuthStrategy {
   }
 }
 
-export default function(app: Application) {
+export default function (app: Application) {
   const authentication = new AuthenticationService(app);
 
   authentication.register('jwt', new JWTStrategy());

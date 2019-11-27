@@ -5,7 +5,7 @@ FROM base AS builder
 #prod or staging
 ARG ANGULAR_ENV
 RUN apk add --update git && rm -rf /tmp/* /var/cache/apk/*
-COPY client/package.json client/package-lock.json ./
+COPY package.json package-lock.json ./
 
 RUN npm set progress=false && npm config set depth 0 && npm cache clean --force && npm config set unsafe-perm true
 
@@ -14,7 +14,7 @@ RUN npm i && mkdir dev && cp -R ./node_modules ./dev
 
 WORKDIR /app/dev
 
-COPY client .
+COPY . .
 
 ## Build the angular app in production mode and store the artifacts in dist folder
 RUN $(npm bin)/ng build --prod --configuration=$ANGULAR_ENV

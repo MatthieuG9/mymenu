@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable, Subject, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import * as _ from 'lodash';
 import { IUser } from 'src/models/user';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 import { AuthModule } from './auth.module';
 
 @Injectable({

@@ -22,7 +22,9 @@ export interface IRecipe {
   ownerId: number | string,
   type: RecipeType,
   url?: string,
-  details?: IRecipeDetails
+  details?: IRecipeDetails,
+  duration: number,
+  serving: number
 }
 
 export class Recipe implements IRecipe {
@@ -32,6 +34,8 @@ export class Recipe implements IRecipe {
   type: RecipeType;
   url?: string;
   details?: IRecipeDetails;
+  duration: number;
+  serving: number;
 
   constructor(values: Object = {}) {
     Object.assign(this, values);

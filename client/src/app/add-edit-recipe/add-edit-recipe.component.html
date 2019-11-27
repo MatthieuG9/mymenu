@@ -24,10 +24,9 @@
         <div [hidden]="typeIsLink()" formGroupName="details">
 
             <div formArrayName="ingredients">
-                <div *ngFor="let ingredient of mainForm.controls.details.controls.ingredients.controls; let i=index"
-                    class="field ingredient">
-                    <app-recipe-ingredient-form [formArray]="mainForm.controls.details.controls.ingredients"
-                        [formArrayIndex]="i"></app-recipe-ingredient-form>
+                <div *ngFor="let ingredient of ingredientsControl.controls; let i=index" class="field ingredient">
+                    <app-recipe-ingredient-form [formArray]="ingredientsControl" [formArrayIndex]="i">
+                    </app-recipe-ingredient-form>
                     <button mat-icon-button aria-label="Add instruction" (click)="addRow('ingredients',i)">
                         <mat-icon>add</mat-icon>
                     </button>
@@ -38,8 +37,8 @@
             </div>
 
             <div formArrayName="instructions">
-                <div *ngFor="let instruction of mainForm.controls.details.controls.instructions.controls; let i=index"
-                    [formGroupName]="i" class="field instruction">
+                <div *ngFor="let instruction of instructionsControl.controls; let i=index" [formGroupName]="i"
+                    class="field instruction">
                     <mat-form-field class="content">
                         <input matInput formControlName="content" placeholder="{{'RECIPE.INSTRUCTION' | translate}}">
                     </mat-form-field>
@@ -55,7 +54,7 @@
         <div class="action-buttons">
             <button routerLink="/" mat-raised-button>{{'CANCEL' | translate }}</button>
             <button type="submit" [disabled]="!mainForm.valid" mat-raised-button color="primary"
-                (click)=save($event)>{{'VALIDATE' | translate }}</button>
+                (click)=save()>{{'VALIDATE' | translate }}</button>
         </div>
     </form>
 </div>
