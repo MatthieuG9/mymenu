@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, FormArray, FormControl, RequiredValidator } from '@angular/forms';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import { ApiService } from 'src/api/api.service';
 import { Recipe, IRecipe, RecipeType, IRecipeDetails } from 'src/models/recipe';
@@ -38,7 +38,8 @@ export class AddEditRecipeComponent implements OnInit {
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private router: Router,
-    private api: ApiService) {
+    private api: ApiService
+  ) {
   }
 
   ngOnInit() {
@@ -55,10 +56,7 @@ export class AddEditRecipeComponent implements OnInit {
       duration: [10, [Validators.min(1), Validators.max(this.maxDuration)]],
       serving: [4, Validators.min(1)],
       type: ['link', Validators.required],
-      url: ['', RxwebValidators.required({
-        conditionalExpression: (x) => x.type == 'link'
-      })
-      ],
+      url: [''],
       details: this.fb.group({
         instructions: this.fb.array([this.buildInstructionForm()]),
         ingredients: this.fb.array([this.buildIngredientForm()])
@@ -100,6 +98,10 @@ export class AddEditRecipeComponent implements OnInit {
       quantity: [1, [Validators.required, Validators.min(0.001)]],
       unit: ['unit', [Validators.required]]
     });
+  }
+
+  formIsValid() {
+    return this.mainForm.valid && (!this.typeIsLink() || this.mainForm.get('url').value);
   }
 
   typeIsLink(): boolean {

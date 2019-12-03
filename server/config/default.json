@@ -30,7 +30,7 @@
     "oauth": {
       "redirect": "http://localhost:4200/",
       "defaults": {
-        "host": "http://localhost:3030"
+        "host": "localhost:3030"
       },
       "google": {
         "key": "googleapikey",

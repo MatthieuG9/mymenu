@@ -53,7 +53,7 @@
         </div>
         <div class="action-buttons">
             <button routerLink="/" mat-raised-button>{{'CANCEL' | translate }}</button>
-            <button type="submit" [disabled]="!mainForm.valid" mat-raised-button color="primary"
+            <button type="submit" [disabled]="!formIsValid()" mat-raised-button color="primary"
                 (click)=save()>{{'VALIDATE' | translate }}</button>
         </div>
     </form>
