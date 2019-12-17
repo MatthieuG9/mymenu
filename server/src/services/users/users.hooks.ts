@@ -1,5 +1,6 @@
 import * as feathersAuthentication from '@feathersjs/authentication';
 import { setField } from 'feathers-authentication-hooks';
+import { ifApiIsNotPublic } from '../../common/hook';
 // Don't remove this comment. It's needed to format import lines nicely.
 
 const { authenticate } = feathersAuthentication.hooks;
@@ -9,19 +10,23 @@ const filterCurrentUser = setField({
   as: 'params.query._id'
 });
 
+const hookAuthenticateFilter = [
+  ifApiIsNotPublic(authenticate('jwt'), filterCurrentUser)
+]
+
 export default {
   before: {
-    all: [  ],
-    find: [ authenticate('jwt'), filterCurrentUser ],
-    get: [ authenticate('jwt'), filterCurrentUser ],
-    create: [  ],
-    update: [  authenticate('jwt'), filterCurrentUser ],
-    patch: [  authenticate('jwt'), filterCurrentUser ],
-    remove: [ authenticate('jwt'), filterCurrentUser ]
+    all: [],
+    find: hookAuthenticateFilter,
+    get: hookAuthenticateFilter,
+    create: [],
+    update: hookAuthenticateFilter,
+    patch: hookAuthenticateFilter,
+    remove: hookAuthenticateFilter
   },
 
   after: {
-    all: [ ],
+    all: [],
     find: [],
     get: [],
     create: [],

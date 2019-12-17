@@ -52,5 +52,6 @@
       }
     }
   },
-  "mongodb": "mongodb://localhost:27017/menu"
+  "mongodb": "mongodb://localhost:27017/menu",
+  "insecure": false
 }

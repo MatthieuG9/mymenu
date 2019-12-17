@@ -14,5 +14,6 @@
             }
         }
     },
-    "mongodb": "MONGODB_URL"
+    "mongodb": "MONGODB_URL",
+    "insecure": "INSECURE"
 }

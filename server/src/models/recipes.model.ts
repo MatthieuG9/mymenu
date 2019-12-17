@@ -3,10 +3,12 @@
 // See http://mongoosejs.com/docs/models.html
 // for more of what you can do here.
 import { Application } from '../declarations';
+import parse from 'coercion';
 
 export default function (app: Application) {
   const mongooseClient = app.get('mongooseClient');
   const { Schema } = mongooseClient;
+  const requireOwner = parse.boolean(app.get('insecure')) !== true;
 
   const instructions = new Schema({
     content: { type: String, required: true }
@@ -25,7 +27,7 @@ export default function (app: Application) {
 
   const recipes = new Schema({
     name: { type: String, required: true },
-    ownerId: { type: Schema.Types.ObjectId, ref: 'users', required: true },
+    ownerId: { type: Schema.Types.ObjectId, ref: 'users', required: requireOwner },
     duration: { type: Number, required: true, default: 10, min: 1 },
     serving: { type: Number, required: true, default: 1, min: 1 },
     type: {

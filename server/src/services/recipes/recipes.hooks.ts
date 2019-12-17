@@ -4,6 +4,7 @@ import { softDelete2, fastJoin } from 'feathers-hooks-common';
 import FixSoftDelete404 from '../../common/fix-404';
 import { HookContext } from '@feathersjs/feathers';
 import search from 'feathers-mongodb-fuzzy-search';
+import { ifApiIsNotPublic } from '../../common/hook';
 // Don't remove this comment. It's needed to format import lines nicely.
 
 const { authenticate } = authentication.hooks;
@@ -17,6 +18,8 @@ const filterByOwnerId = setField({
   from: 'params.user._id',
   as: 'params.query.ownerId'
 });
+
+const filterByOwnerIfNotPublic = ifApiIsNotPublic(filterByOwnerId);
 
 const ingredientResolve = {
   joins: {
@@ -36,20 +39,20 @@ const ingredientResolve = {
 export default {
   before: {
     all: [
-      authenticate('jwt'),
+      ifApiIsNotPublic(authenticate('jwt')),
       softDelete2()
     ],
     find: [
       search({
         fields: ['name']
       }),
-      filterByOwnerId
+      filterByOwnerIfNotPublic
     ],
-    get: [filterByOwnerId],
-    create: [setOwnerInBody],
-    update: [filterByOwnerId],
-    patch: [filterByOwnerId],
-    remove: [filterByOwnerId]
+    get: [filterByOwnerIfNotPublic],
+    create: [filterByOwnerIfNotPublic],
+    update: [filterByOwnerIfNotPublic],
+    patch: [filterByOwnerIfNotPublic],
+    remove: [filterByOwnerIfNotPublic]
   },
 
   after: {
