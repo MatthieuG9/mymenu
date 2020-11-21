@@ -49,7 +49,7 @@ export default {
       filterByOwnerIfNotPublic
     ],
     get: [filterByOwnerIfNotPublic],
-    create: [filterByOwnerIfNotPublic],
+    create: [setOwnerInBody],
     update: [filterByOwnerIfNotPublic],
     patch: [filterByOwnerIfNotPublic],
     remove: [filterByOwnerIfNotPublic]
